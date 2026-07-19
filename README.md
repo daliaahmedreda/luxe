@@ -40,7 +40,7 @@ Edit the `products` array in the `<script>` section. Each product has:
 ```
 
 ### Change WhatsApp Number
-Replace `201234567890` in all `wa.me/201234567890` links with your number (country code, no `+`).
+Current number: `201000791799` (01000791799). Replace in all `wa.me/` links if needed.
 
 ### Change Colors
 Edit CSS variables in `:root`:
