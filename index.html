@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LUXE — Premium Cosmetics</title>
+  <meta name="description" content="LUXE — Ultra-premium cosmetics for radiant, luxurious beauty." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --cream:        #fdf6f0;
+      --cream-deep:   #f5ebe3;
+      --warm-beige:   #f0e6df;
+      --soft-brown:   #3d2c26;
+      --soft-brown-m: #5c4a42;
+      --rose-gold:    #b76e79;
+      --rose-gold-l:  #d4a0a7;
+      --gold:         #c9a96e;
+      --gold-l:       #e0c992;
+      --white-glass:  rgba(255, 255, 255, 0.22);
+      --white-glass-s:rgba(255, 255, 255, 0.12);
+      --border-glass: rgba(255, 255, 255, 0.35);
+      --border-gold:  rgba(201, 169, 110, 0.30);
+      --shadow-soft:  0 8px 32px rgba(61, 44, 38, .10);
+      --shadow-card:  0 4px 24px rgba(61, 44, 38, .08);
+      --shadow-hover: 0 12px 48px rgba(183, 110, 121, .18);
+      --font-en: 'Inter', sans-serif;
+      --font-ar: 'Noto Sans Arabic', 'Inter', sans-serif;
+      --fs-hero: clamp(2rem, 5vw, 3.5rem);
+      --fs-sub:  clamp(1rem, 2vw, 1.25rem);
+      --fs-body: 1rem;
+      --fs-sm:   .875rem;
+      --fs-xs:   .75rem;
+      --fs-price:1.25rem;
+      --radius-xl: 64px;
+      --radius-lg: 48px;
+      --radius-md: 24px;
+      --radius-sm: 16px;
+      --radius-xs: 10px;
+      --max-w: 1200px;
+      --container-pad: clamp(1rem, 4vw, 2.5rem);
+      --ease-out: cubic-bezier(.22, 1, .36, 1);
+      --dur: .4s;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-en);
+      background: var(--cream);
+      color: var(--soft-brown);
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    html[dir="rtl"] body { font-family: var(--font-ar); }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(183,110,121,.12) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 80%, rgba(201,169,110,.10) 0%, transparent 60%),
+        radial-gradient(ellipse 90% 70% at 50% 50%, rgba(240,230,223,.8) 0%, var(--cream) 100%);
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: .03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+      pointer-events: none;
+    }
+
+    .glass {
+      background: var(--white-glass);
+      backdrop-filter: blur(18px) saturate(1.4);
+      -webkit-backdrop-filter: blur(18px) saturate(1.4);
+      border: 1px solid var(--border-glass);
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.30);
+      backdrop-filter: blur(20px) saturate(1.5);
+      -webkit-backdrop-filter: blur(20px) saturate(1.5);
+      border: 1px solid rgba(255, 255, 255, 0.40);
+      box-shadow: var(--shadow-card);
+      transition: transform var(--dur) var(--ease-out),
+                  box-shadow var(--dur) var(--ease-out),
+                  border-color var(--dur) var(--ease-out);
+    }
+
+    .glass-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--border-gold);
+    }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: var(--container-pad);
+    }
+
+    .main-wrapper {
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* HEADER */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 1rem 0;
+      transition: background var(--dur) var(--ease-out);
+    }
+
+    .site-header.scrolled {
+      background: rgba(253, 246, 240, 0.75);
+      backdrop-filter: blur(20px) saturate(1.5);
+      -webkit-backdrop-filter: blur(20px) saturate(1.5);
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand { display: flex; flex-direction: column; gap: .15rem; }
+
+    .brand-name {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      color: var(--soft-brown);
+      line-height: 1;
+    }
+
+    .brand-sub {
+      font-size: var(--fs-xs);
+      font-weight: 400;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--rose-gold);
+    }
+
+    .nav-actions { display: flex; align-items: center; gap: .5rem; }
+
+    .lang-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .5rem 1.1rem;
+      border-radius: 100px;
+      border: 1px solid var(--border-glass);
+      background: var(--white-glass);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: var(--soft-brown);
+      font-size: var(--fs-sm);
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--dur) var(--ease-out);
+      font-family: inherit;
+      white-space: nowrap;
+    }
+
+    .lang-btn:hover {
+      background: rgba(255,255,255,0.40);
+      border-color: var(--rose-gold-l);
+      color: var(--rose-gold);
+    }
+
+    .lang-btn:active { transform: scale(.96); }
+    .lang-btn i { font-size: .8rem; color: var(--rose-gold); }
+
+    /* HERO */
+    .hero { text-align: center; padding: 3rem 0 2rem; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .35rem 1rem;
+      border-radius: 100px;
+      font-size: var(--fs-xs);
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--rose-gold);
+      border: 1px solid var(--border-gold);
+      background: rgba(201,169,110,0.08);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-badge i { font-size: .65rem; }
+
+    .hero h1 {
+      font-size: var(--fs-hero);
+      font-weight: 600;
+      line-height: 1.15;
+      color: var(--soft-brown);
+      margin-bottom: 1rem;
+      letter-spacing: -.02em;
+    }
+
+    .hero h1 .accent {
+      background: linear-gradient(135deg, var(--rose-gold), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: var(--fs-sub);
+      font-weight: 300;
+      color: var(--soft-brown-m);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--rose-gold-l), transparent);
+      margin: 2rem auto;
+      border: none;
+    }
+
+    /* SECTION */
+    .section-head { text-align: center; margin-bottom: 2.5rem; }
+
+    .section-head h2 {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 600;
+      color: var(--soft-brown);
+      letter-spacing: -.01em;
+      margin-bottom: .4rem;
+    }
+
+    .section-head p {
+      font-size: var(--fs-sm);
+      color: var(--soft-brown-m);
+      font-weight: 300;
+    }
+
+    /* PRODUCT GRID */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+      padding-bottom: 2rem;
+    }
+
+    .product-card {
+      border-radius: var(--radius-md);
+      padding: 1.75rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+      /* START hidden — JS will reveal */
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .5s var(--ease-out),
+                  transform .5s var(--ease-out),
+                  box-shadow var(--dur) var(--ease-out),
+                  border-color var(--dur) var(--ease-out);
+    }
+
+    .product-card.shown {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .product-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 60%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+      transition: left .7s var(--ease-out);
+      pointer-events: none;
+    }
+
+    .product-card:hover::before { left: 120%; }
+
+    .product-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      color: var(--rose-gold);
+      background: linear-gradient(135deg, rgba(183,110,121,.08), rgba(201,169,110,.08));
+      border: 1px solid rgba(183,110,121,.12);
+      flex-shrink: 0;
+      transition: all var(--dur) var(--ease-out);
+    }
+
+    .product-card:hover .product-icon {
+      background: linear-gradient(135deg, rgba(183,110,121,.15), rgba(201,169,110,.15));
+      border-color: rgba(183,110,121,.25);
+      transform: scale(1.05);
+    }
+
+    .product-tag {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: .2rem .65rem;
+      border-radius: 100px;
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    html[dir="rtl"] .product-tag { right: auto; left: 1rem; }
+
+    .tag-best    { background: rgba(183,110,121,.12); color: var(--rose-gold); }
+    .tag-new     { background: rgba(201,169,110,.12); color: var(--gold); }
+    .tag-luxury  { background: rgba(61,44,38,.08); color: var(--soft-brown-m); }
+    .tag-hydrate { background: rgba(100,160,180,.10); color: #5a9aaa; }
+    .tag-organic { background: rgba(120,170,100,.10); color: #6a9a55; }
+
+    .product-name {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--soft-brown);
+      line-height: 1.35;
+    }
+
+    .product-desc {
+      font-size: var(--fs-sm);
+      font-weight: 300;
+      color: var(--soft-brown-m);
+      line-height: 1.55;
+    }
+
+    .product-bottom {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .75rem;
+    }
+
+    .product-price {
+      font-size: var(--fs-price);
+      font-weight: 600;
+      color: var(--soft-brown);
+      letter-spacing: -.01em;
+    }
+
+    .product-price .currency {
+      font-size: var(--fs-xs);
+      font-weight: 400;
+      color: var(--soft-brown-m);
+      margin-left: .2rem;
+    }
+
+    html[dir="rtl"] .product-price .currency {
+      margin-left: 0;
+      margin-right: .2rem;
+    }
+
+    .btn-add {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--border-glass);
+      background: var(--white-glass);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: var(--rose-gold);
+      font-size: .85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--dur) var(--ease-out);
+      flex-shrink: 0;
+    }
+
+    .btn-add:hover {
+      background: var(--rose-gold);
+      color: #fff;
+      border-color: var(--rose-gold);
+      transform: scale(1.1);
+    }
+
+    .btn-add:active { transform: scale(.92); }
+
+    /* FOOTER */
+    .site-footer {
+      text-align: center;
+      padding: 2.5rem 0 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.3);
+      margin-top: 1rem;
+    }
+
+    .footer-brand {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: .15em;
+      color: var(--soft-brown);
+      margin-bottom: .5rem;
+    }
+
+    .footer-copy {
+      font-size: var(--fs-xs);
+      color: var(--soft-brown-m);
+      font-weight: 300;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .footer-links a {
+      font-size: 1rem;
+      color: var(--soft-brown-m);
+      transition: color var(--dur) var(--ease-out), transform var(--dur) var(--ease-out);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: var(--rose-gold);
+      transform: translateY(-2px);
+    }
+
+    /* WHATSAPP */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 1.75rem;
+      right: 1.75rem;
+      z-index: 9999;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.65rem;
+      color: #fff;
+      text-decoration: none;
+      background: rgba(37, 211, 102, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.25);
+      box-shadow: 0 4px 20px rgba(37, 211, 102, .30), 0 0 0 0 rgba(37, 211, 102, .40);
+      animation: wa-pulse 2.2s ease-out infinite;
+      transition: transform var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out);
+    }
+
+    html[dir="rtl"] .whatsapp-float { right: auto; left: 1.75rem; }
+
+    .whatsapp-float:hover {
+      transform: scale(1.12);
+      box-shadow: 0 6px 30px rgba(37, 211, 102, .40), 0 0 0 0 rgba(37, 211, 102, 0);
+      animation: none;
+    }
+
+    .whatsapp-float:active { transform: scale(.95); }
+
+    @keyframes wa-pulse {
+      0%   { box-shadow: 0 4px 20px rgba(37,211,102,.30), 0 0 0 0 rgba(37,211,102,.40); }
+      70%  { box-shadow: 0 4px 20px rgba(37,211,102,.30), 0 0 0 18px rgba(37,211,102,0); }
+      100% { box-shadow: 0 4px 20px rgba(37,211,102,.30), 0 0 0 0 rgba(37,211,102,0); }
+    }
+
+    .wa-tooltip {
+      position: absolute;
+      bottom: calc(100% + .6rem);
+      right: 0;
+      white-space: nowrap;
+      padding: .4rem .8rem;
+      border-radius: var(--radius-xs);
+      font-size: var(--fs-xs);
+      font-weight: 500;
+      color: var(--soft-brown);
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border-glass);
+      box-shadow: var(--shadow-soft);
+      opacity: 0;
+      transform: translateY(4px);
+      transition: all .25s var(--ease-out);
+      pointer-events: none;
+    }
+
+    html[dir="rtl"] .wa-tooltip { right: auto; left: 0; }
+
+    .whatsapp-float:hover .wa-tooltip { opacity: 1; transform: translateY(0); }
+
+    /* TOAST */
+    .toast-container {
+      position: fixed;
+      bottom: 6rem;
+      right: 1.75rem;
+      z-index: 9998;
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      pointer-events: none;
+    }
+
+    html[dir="rtl"] .toast-container { right: auto; left: 1.75rem; }
+
+    .toast {
+      padding: .65rem 1.1rem;
+      border-radius: var(--radius-sm);
+      font-size: var(--fs-sm);
+      font-weight: 400;
+      color: var(--soft-brown);
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-glass);
+      box-shadow: var(--shadow-soft);
+      opacity: 0;
+      transform: translateY(10px) scale(.95);
+      animation: toast-in .35s var(--ease-out) forwards;
+      pointer-events: auto;
+    }
+
+    .toast.out { animation: toast-out .3s var(--ease-out) forwards; }
+
+    @keyframes toast-in  { to { opacity: 1; transform: translateY(0) scale(1); } }
+    @keyframes toast-out { to { opacity: 0; transform: translateY(-8px) scale(.95); } }
+
+    /* REVEAL (for hero / section head) */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .6s var(--ease-out), transform .6s var(--ease-out);
+    }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .products-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+      .product-card { padding: 1.4rem 1.2rem; }
+      .hero { padding: 2rem 0 1.5rem; }
+      .brand-name { font-size: 1.4rem; }
+      .whatsapp-float { width: 54px; height: 54px; font-size: 1.4rem; bottom: 1.25rem; right: 1.25rem; }
+      html[dir="rtl"] .whatsapp-float { right: auto; left: 1.25rem; }
+    }
+
+    @media (max-width: 480px) {
+      .products-grid { grid-template-columns: 1fr; }
+      .nav { flex-wrap: wrap; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    .lang-btn:focus-visible,
+    .btn-add:focus-visible,
+    .whatsapp-float:focus-visible,
+    .footer-links a:focus-visible {
+      outline: 2px solid var(--rose-gold);
+      outline-offset: 3px;
+    }
+
+    ::selection { background: rgba(183, 110, 121, .2); color: var(--soft-brown); }
+  </style>
+</head>
+
+<body>
+  <div class="main-wrapper">
+
+    <header class="site-header" id="siteHeader">
+      <div class="container">
+        <nav class="nav" role="navigation" aria-label="Main navigation">
+          <div class="brand">
+            <span class="brand-name">LUXE</span>
+            <span class="brand-sub" id="brandSub">Premium Cosmetics</span>
+          </div>
+          <div class="nav-actions">
+            <button class="lang-btn" id="langToggle" aria-label="Switch language" type="button">
+              <i class="fa-solid fa-globe"></i>
+              <span id="langLabel">العربية</span>
+            </button>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero container" aria-label="Hero">
+        <div class="reveal" id="heroContent">
+          <div class="hero-badge">
+            <i class="fa-solid fa-sparkles"></i>
+            <span id="heroBadgeText">Luxury Beauty Collection</span>
+          </div>
+          <h1 id="heroTitle">Discover Your <span class="accent">Radiant</span> Beauty</h1>
+          <p id="heroDesc">Indulge in our curated collection of premium cosmetics, crafted with the finest ingredients for timeless elegance.</p>
+        </div>
+        <hr class="divider" />
+      </section>
+
+      <section class="container" aria-label="Products">
+        <div class="section-head reveal">
+          <h2 id="sectionTitle">Our Collection</h2>
+          <p id="sectionDesc">Handpicked essentials for your beauty ritual</p>
+        </div>
+        <div class="products-grid" id="productsGrid" role="list"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer container">
+      <div class="reveal">
+        <div class="footer-brand">LUXE</div>
+        <p class="footer-copy" id="footerCopy">&copy; 2025 LUXE Cosmetics. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!--
+    📌 TO CUSTOMIZE WHATSAPP:
+    Replace 201234567890 with your actual number (country code, no +)
+  -->
+  <a href="https://wa.me/201234567890?text=Hello%20LUXE!%20I%27m%20interested%20in%20your%20products."
+     class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+    <span class="wa-tooltip" id="waTooltip">Chat with us</span>
+  </a>
+
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <script>
+    /* ==============================================
+       PRODUCT DATABASE
+       ==============================================
+       📌 SUPABASE INTEGRATION POINT:
+       Replace this array with:
+         async function fetchProducts() {
+           const { data, error } = await supabase
+             .from('products').select('*').order('id');
+           if (error) console.error(error);
+           return data;
+         }
+       Table: id, name_en, name_ar, desc_en, desc_ar, price, icon, tag
+       ============================================== */
+    const products = [
+      {
+        id: 1,
+        nameEn: 'Radiant Glow Serum',
+        nameAr: 'سيروم توهج مشع',
+        descEn: 'Vitamin C + Hyaluronic Acid, 30ml',
+        descAr: 'فيتامين سي + حمض الهيالورونيك، ٣٠ مل',
+        price: 1890,
+        icon: 'fa-droplet',
+        tag: 'best seller'
+      },
+      {
+        id: 2,
+        nameEn: 'Velvet Matte Lipstick',
+        nameAr: 'أحمر شفاه مات مخملي',
+        descEn: 'Long-wear formula, Shade: Rose Dusk',
+        descAr: 'تركيبة طويلة الثبات، درجة: غسق الورد',
+        price: 750,
+        icon: 'fa-heart',
+        tag: 'best seller'
+      },
+      {
+        id: 3,
+        nameEn: 'Golden Hour Highlighter',
+        nameAr: 'هايلايتر الساعة الذهبية',
+        descEn: 'Champagne shimmer, 12g',
+        descAr: 'لمعان شمباني، ١٢ جرام',
+        price: 1350,
+        icon: 'fa-sun',
+        tag: 'new'
+      },
+      {
+        id: 4,
+        nameEn: 'Silk Foundation',
+        nameAr: 'أساس الحرير',
+        descEn: 'Lightweight buildable coverage, 30ml',
+        descAr: 'تغطية خفيفة قابلة للبناء، ٣٠ مل',
+        price: 1650,
+        icon: 'fa-bottle-droplet',
+        tag: 'luxury'
+      },
+      {
+        id: 5,
+        nameEn: 'Deep Hydration Cream',
+        nameAr: 'كريم ترطيب عميق',
+        descEn: 'Ceramides + Squalane, 50ml',
+        descAr: 'سيراميد + سكوالين، ٥٠ مل',
+        price: 1200,
+        icon: 'fa-mug-hot',
+        tag: 'hydrating'
+      },
+      {
+        id: 6,
+        nameEn: 'Rose Petal Mist',
+        nameAr: 'ميست بتلات الورد',
+        descEn: 'Rose water + Niacinamide, 120ml',
+        descAr: 'ماء الورد + نياسيناميد، ١٢٠ مل',
+        price: 680,
+        icon: 'fa-spray-can-sparkles',
+        tag: 'organic'
+      },
+      {
+        id: 7,
+        nameEn: 'Midnight Eye Cream',
+        nameAr: 'كريم العين منتصف الليل',
+        descEn: 'Retinol + Peptides, 15ml',
+        descAr: 'ريتينول + ببتيدات، ١٥ مل',
+        price: 2100,
+        icon: 'fa-eye',
+        tag: 'luxury'
+      },
+      {
+        id: 8,
+        nameEn: 'Blush Bouquet',
+        nameAr: 'بوشيه البلاشر',
+        descEn: 'Powder blush, Shade: Peach Bloom',
+        descAr: 'بلاشر بودرة، درجة: تفتح الخوخ',
+        price: 890,
+        icon: 'fa-palette',
+        tag: 'new'
+      },
+      {
+        id: 9,
+        nameEn: 'Lash Crown Mascara',
+        nameAr: 'ماسكارا تاج الرموش',
+        descEn: 'Volume + Length waterproof, 10ml',
+        descAr: 'حجم + طول مقاوم للماء، ١٠ مل',
+        price: 720,
+        icon: 'fa-wand-magic-sparkles',
+        tag: 'best seller'
+      },
+      {
+        id: 10,
+        nameEn: 'Luxe Perfume Oil',
+        nameAr: 'زيت عطر فاخر',
+        descEn: 'Oud + Rose absolute, 12ml',
+        descAr: 'عود + مطلق الورد، ١٢ مل',
+        price: 2950,
+        icon: 'fa-gem',
+        tag: 'luxury'
+      }
+    ];
+
+    /* Tag → CSS class */
+    const tagClassMap = {
+      'best seller': 'tag-best',
+      'new':         'tag-new',
+      'luxury':      'tag-luxury',
+      'hydrating':   'tag-hydrate',
+      'organic':     'tag-organic'
+    };
+
+    /* Tag → translated label */
+    const tagTranslations = {
+      'best seller': { en: 'Best Seller', ar: 'الأكثر مبيعاً' },
+      'new':         { en: 'New',         ar: 'جديد' },
+      'luxury':      { en: 'Luxury',      ar: 'فاخر' },
+      'hydrating':   { en: 'Hydrating',   ar: 'مرطّب' },
+      'organic':     { en: 'Organic',     ar: 'عضوي' }
+    };
+
+    /* UI strings */
+    const ui = {
+      en: {
+        brandSub:    'Premium Cosmetics',
+        heroBadge:   'Luxury Beauty Collection',
+        heroTitle:   'Discover Your <span class="accent">Radiant</span> Beauty',
+        heroDesc:    'Indulge in our curated collection of premium cosmetics, crafted with the finest ingredients for timeless elegance.',
+        sectionTitle:'Our Collection',
+        sectionDesc: 'Handpicked essentials for your beauty ritual',
+        footerCopy:  '&copy; 2025 LUXE Cosmetics. All rights reserved.',
+        waTooltip:   'Chat with us',
+        langLabel:   'العربية',
+        currency:    'EGP',
+        addedToast:  'Added to wishlist ♥'
+      },
+      ar: {
+        brandSub:    'كوسميتكس فاخرة',
+        heroBadge:   'مجموعة جمال فاخرة',
+        heroTitle:   'اكتشفي <span class="accent">جمالك</span> المشع',
+        heroDesc:    'استمتعي بمجموعتنا المختارة من الكوسميتكس الفاخرة، مصنوعة من أجود المكونات لأناقة خالدة.',
+        sectionTitle:'مجموعتنا',
+        sectionDesc: 'أساسيات مختارة بعناية لطقوس جمالك',
+        footerCopy:  '&copy; ٢٠٢٥ LUXE كوسميتكس. جميع الحقوق محفوظة.',
+        waTooltip:   'تحدثي معنا',
+        langLabel:   'English',
+        currency:    'ج.م',
+        addedToast:  'تمت الإضافة للمفضلة ♥'
+      }
+    };
+
+    /* State */
+    let currentLang = sessionStorage.getItem('luxe-lang') || 'en';
+
+    /* Arabic numeral converter */
+    function formatPrice(num, lang) {
+      if (lang === 'ar') {
+        const d = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+        return String(num).replace(/\d/g, c => d[c]);
+      }
+      return num.toLocaleString('en-US');
+    }
+
+    /* ==============================================
+       RENDER PRODUCTS
+       ============================================== */
+    function renderProducts(lang) {
+      const grid = document.getElementById('productsGrid');
+      grid.innerHTML = '';
+
+      products.forEach((p, i) => {
+        const name   = lang === 'ar' ? p.nameAr : p.nameEn;
+        const desc   = lang === 'ar' ? p.descAr : p.descEn;
+        const price  = formatPrice(p.price, lang);
+        const curr   = ui[lang].currency;
+        const tagTxt = (tagTranslations[p.tag] && tagTranslations[p.tag][lang]) || p.tag;
+        const tagCls = tagClassMap[p.tag] || 'tag-best';
+
+        const card = document.createElement('div');
+        card.className = 'product-card glass-card';
+        card.setAttribute('role', 'listitem');
+        /* Stagger delay via CSS transition-delay */
+        card.style.transitionDelay = (i * 70) + 'ms';
+
+        card.innerHTML =
+          '<span class="product-tag ' + tagCls + '">' + tagTxt + '</span>' +
+          '<div class="product-icon"><i class="fa-solid ' + p.icon + '"></i></div>' +
+          '<div class="product-name">' + name + '</div>' +
+          '<div class="product-desc">' + desc + '</div>' +
+          '<div class="product-bottom">' +
+            '<div class="product-price">' + price + '<span class="currency">' + curr + '</span></div>' +
+            '<button class="btn-add" aria-label="Add ' + name + ' to wishlist" type="button" data-id="' + p.id + '">' +
+              '<i class="fa-solid fa-plus"></i>' +
+            '</button>' +
+          '</div>';
+
+        grid.appendChild(card);
+      });
+
+      /* ✅ FIX: Use setTimeout to guarantee the browser has painted
+         the initial opacity:0 state BEFORE we add .shown.
+         requestAnimationFrame alone is not reliable — browsers
+         may batch the initial paint and skip the transition. */
+      setTimeout(function() {
+        var cards = grid.querySelectorAll('.product-card');
+        cards.forEach(function(c) { c.classList.add('shown'); });
+      }, 60);
+
+      /* Attach wishlist button handlers */
+      grid.querySelectorAll('.btn-add').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          var id = e.currentTarget.getAttribute('data-id');
+          var product = products.find(function(p) { return p.id == id; });
+          if (product) {
+            var pName = lang === 'ar' ? product.nameAr : product.nameEn;
+            showToast(pName + ' — ' + ui[lang].addedToast);
+          }
+        });
+      });
+    }
+
+    /* Update all UI text */
+    function updateUI(lang) {
+      var t = ui[lang];
+      document.getElementById('brandSub').textContent      = t.brandSub;
+      document.getElementById('heroBadgeText').textContent   = t.heroBadge;
+      document.getElementById('heroTitle').innerHTML         = t.heroTitle;
+      document.getElementById('heroDesc').textContent        = t.heroDesc;
+      document.getElementById('sectionTitle').textContent    = t.sectionTitle;
+      document.getElementById('sectionDesc').textContent     = t.sectionDesc;
+      document.getElementById('footerCopy').innerHTML        = t.footerCopy;
+      document.getElementById('waTooltip').textContent       = t.waTooltip;
+      document.getElementById('langLabel').textContent       = t.langLabel;
+    }
+
+    /* Set language */
+    function setLang(lang) {
+      currentLang = lang;
+      sessionStorage.setItem('luxe-lang', lang);
+      document.documentElement.setAttribute('lang', lang);
+      document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+      updateUI(lang);
+      renderProducts(lang);
+    }
+
+    document.getElementById('langToggle').addEventListener('click', function() {
+      setLang(currentLang === 'en' ? 'ar' : 'en');
+    });
+
+    /* Toast */
+    function showToast(message) {
+      var container = document.getElementById('toastContainer');
+      var toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.textContent = message;
+      container.appendChild(toast);
+      setTimeout(function() {
+        toast.classList.add('out');
+        toast.addEventListener('animationend', function() { toast.remove(); });
+      }, 2200);
+    }
+
+    /* Header scroll effect */
+    var header = document.getElementById('siteHeader');
+    var ticking = false;
+    window.addEventListener('scroll', function() {
+      if (!ticking) {
+        requestAnimationFrame(function() {
+          header.classList.toggle('scrolled', window.scrollY > 30);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    /* Scroll reveal for hero / section-head / footer */
+    function initReveal() {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.reveal').forEach(function(el) {
+        observer.observe(el);
+      });
+    }
+
+    /* Init */
+    document.addEventListener('DOMContentLoaded', function() {
+      setLang(currentLang);
+      initReveal();
+    });
+  </script>
+
+  <!--
+  ==============================================
+  📌 DEPLOYMENT & CUSTOMIZATION NOTES
+  ==============================================
+
+  1. CONNECTING TO SUPABASE:
+     - Create project at https://supabase.com
+     - Table 'products': id (int8 PK), name_en (text), name_ar (text),
+       desc_en (text), desc_ar (text), price (float8), icon (text), tag (text)
+     - Add CDN: <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+     - Init: const supabase = supabase.createClient('URL','ANON_KEY')
+     - Replace static array with async fetch (see JS comments)
+
+  2. DEPLOY TO VERCEL:
+     - Save as index.html → push to GitHub → import in Vercel
+
+  3. CUSTOMIZE WHATSAPP:
+     - Replace 201234567890 in the <a href> near bottom of file
+
+  4. ADD/REMOVE PRODUCTS:
+     - Edit the products array in JS
+     - Each: id, nameEn, nameAr, descEn, descAr, price, icon, tag
+
+  5. COLORS:
+     - Edit :root CSS variables: --cream, --soft-brown, --rose-gold, --gold
+  ==============================================
+  -->
+</body>
+</html>
