@@ -1,1014 +1,529 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LUXE — Premium Cosmetics</title>
-  <meta name="description" content="LUXE — Ultra-premium cosmetics for radiant, luxurious beauty." />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-
-  <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-      --cream:        #fdf6f0;
-      --cream-deep:   #f5ebe3;
-      --warm-beige:   #f0e6df;
-      --soft-brown:   #3d2c26;
-      --soft-brown-m: #5c4a42;
-      --rose-gold:    #b76e79;
-      --rose-gold-l:  #d4a0a7;
-      --gold:         #c9a96e;
-      --gold-l:       #e0c992;
-      --white-glass:  rgba(255, 255, 255, 0.22);
-      --white-glass-s:rgba(255, 255, 255, 0.12);
-      --border-glass: rgba(255, 255, 255, 0.35);
-      --border-gold:  rgba(201, 169, 110, 0.30);
-      --shadow-soft:  0 8px 32px rgba(61, 44, 38, .10);
-      --shadow-card:  0 4px 24px rgba(61, 44, 38, .08);
-      --shadow-hover: 0 12px 48px rgba(183, 110, 121, .18);
-      --font-en: 'Inter', sans-serif;
-      --font-ar: 'Noto Sans Arabic', 'Inter', sans-serif;
-      --fs-hero: clamp(2rem, 5vw, 3.5rem);
-      --fs-sub:  clamp(1rem, 2vw, 1.25rem);
-      --fs-body: 1rem;
-      --fs-sm:   .875rem;
-      --fs-xs:   .75rem;
-      --fs-price:1.25rem;
-      --radius-xl: 64px;
-      --radius-lg: 48px;
-      --radius-md: 24px;
-      --radius-sm: 16px;
-      --radius-xs: 10px;
-      --max-w: 1200px;
-      --container-pad: clamp(1rem, 4vw, 2.5rem);
-      --ease-out: cubic-bezier(.22, 1, .36, 1);
-      --dur: .4s;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: var(--font-en);
-      background: var(--cream);
-      color: var(--soft-brown);
-      min-height: 100vh;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    html[dir="rtl"] body { font-family: var(--font-ar); }
-
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      background:
-        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(183,110,121,.12) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 50% at 80% 80%, rgba(201,169,110,.10) 0%, transparent 60%),
-        radial-gradient(ellipse 90% 70% at 50% 50%, rgba(240,230,223,.8) 0%, var(--cream) 100%);
-    }
-
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      opacity: .03;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      background-size: 200px 200px;
-      pointer-events: none;
-    }
-
-    .glass {
-      background: var(--white-glass);
-      backdrop-filter: blur(18px) saturate(1.4);
-      -webkit-backdrop-filter: blur(18px) saturate(1.4);
-      border: 1px solid var(--border-glass);
-    }
-
-    .glass-card {
-      background: rgba(255, 255, 255, 0.30);
-      backdrop-filter: blur(20px) saturate(1.5);
-      -webkit-backdrop-filter: blur(20px) saturate(1.5);
-      border: 1px solid rgba(255, 255, 255, 0.40);
-      box-shadow: var(--shadow-card);
-      transition: transform var(--dur) var(--ease-out),
-                  box-shadow var(--dur) var(--ease-out),
-                  border-color var(--dur) var(--ease-out);
-    }
-
-    .glass-card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow-hover);
-      border-color: var(--border-gold);
-    }
-
-    .container {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: var(--container-pad);
-    }
-
-    .main-wrapper {
-      border-radius: var(--radius-xl);
-      overflow: hidden;
-      position: relative;
-      min-height: 100vh;
-    }
-
-    /* HEADER */
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      padding: 1rem 0;
-      transition: background var(--dur) var(--ease-out);
-    }
-
-    .site-header.scrolled {
-      background: rgba(253, 246, 240, 0.75);
-      backdrop-filter: blur(20px) saturate(1.5);
-      -webkit-backdrop-filter: blur(20px) saturate(1.5);
-      border-bottom: 1px solid rgba(255,255,255,0.3);
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-
-    .brand { display: flex; flex-direction: column; gap: .15rem; }
-
-    .brand-name {
-      font-size: 1.75rem;
-      font-weight: 700;
-      letter-spacing: .18em;
-      color: var(--soft-brown);
-      line-height: 1;
-    }
-
-    .brand-sub {
-      font-size: var(--fs-xs);
-      font-weight: 400;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      color: var(--rose-gold);
-    }
-
-    .nav-actions { display: flex; align-items: center; gap: .5rem; }
-
-    .lang-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: .4rem;
-      padding: .5rem 1.1rem;
-      border-radius: 100px;
-      border: 1px solid var(--border-glass);
-      background: var(--white-glass);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      color: var(--soft-brown);
-      font-size: var(--fs-sm);
-      font-weight: 500;
-      cursor: pointer;
-      transition: all var(--dur) var(--ease-out);
-      font-family: inherit;
-      white-space: nowrap;
-    }
-
-    .lang-btn:hover {
-      background: rgba(255,255,255,0.40);
-      border-color: var(--rose-gold-l);
-      color: var(--rose-gold);
-    }
-
-    .lang-btn:active { transform: scale(.96); }
-    .lang-btn i { font-size: .8rem; color: var(--rose-gold); }
-
-    /* HERO */
-    .hero { text-align: center; padding: 3rem 0 2rem; }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: .4rem;
-      padding: .35rem 1rem;
-      border-radius: 100px;
-      font-size: var(--fs-xs);
-      font-weight: 500;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--rose-gold);
-      border: 1px solid var(--border-gold);
-      background: rgba(201,169,110,0.08);
-      margin-bottom: 1.5rem;
-    }
-
-    .hero-badge i { font-size: .65rem; }
-
-    .hero h1 {
-      font-size: var(--fs-hero);
-      font-weight: 600;
-      line-height: 1.15;
-      color: var(--soft-brown);
-      margin-bottom: 1rem;
-      letter-spacing: -.02em;
-    }
-
-    .hero h1 .accent {
-      background: linear-gradient(135deg, var(--rose-gold), var(--gold));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero p {
-      font-size: var(--fs-sub);
-      font-weight: 300;
-      color: var(--soft-brown-m);
-      max-width: 520px;
-      margin: 0 auto;
-      line-height: 1.7;
-    }
-
-    .divider {
-      width: 60px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--rose-gold-l), transparent);
-      margin: 2rem auto;
-      border: none;
-    }
-
-    /* SECTION */
-    .section-head { text-align: center; margin-bottom: 2.5rem; }
-
-    .section-head h2 {
-      font-size: clamp(1.4rem, 3vw, 2rem);
-      font-weight: 600;
-      color: var(--soft-brown);
-      letter-spacing: -.01em;
-      margin-bottom: .4rem;
-    }
-
-    .section-head p {
-      font-size: var(--fs-sm);
-      color: var(--soft-brown-m);
-      font-weight: 300;
-    }
-
-    /* PRODUCT GRID */
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 1.5rem;
-      padding-bottom: 2rem;
-    }
-
-    .product-card {
-      border-radius: var(--radius-md);
-      padding: 1.75rem 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      position: relative;
-      overflow: hidden;
-      cursor: default;
-      /* START hidden — JS will reveal */
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity .5s var(--ease-out),
-                  transform .5s var(--ease-out),
-                  box-shadow var(--dur) var(--ease-out),
-                  border-color var(--dur) var(--ease-out);
-    }
-
-    .product-card.shown {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .product-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: -100%;
-      width: 60%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
-      transition: left .7s var(--ease-out);
-      pointer-events: none;
-    }
-
-    .product-card:hover::before { left: 120%; }
-
-    .product-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.35rem;
-      color: var(--rose-gold);
-      background: linear-gradient(135deg, rgba(183,110,121,.08), rgba(201,169,110,.08));
-      border: 1px solid rgba(183,110,121,.12);
-      flex-shrink: 0;
-      transition: all var(--dur) var(--ease-out);
-    }
-
-    .product-card:hover .product-icon {
-      background: linear-gradient(135deg, rgba(183,110,121,.15), rgba(201,169,110,.15));
-      border-color: rgba(183,110,121,.25);
-      transform: scale(1.05);
-    }
-
-    .product-tag {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      padding: .2rem .65rem;
-      border-radius: 100px;
-      font-size: .65rem;
-      font-weight: 600;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-
-    html[dir="rtl"] .product-tag { right: auto; left: 1rem; }
-
-    .tag-best    { background: rgba(183,110,121,.12); color: var(--rose-gold); }
-    .tag-new     { background: rgba(201,169,110,.12); color: var(--gold); }
-    .tag-luxury  { background: rgba(61,44,38,.08); color: var(--soft-brown-m); }
-    .tag-hydrate { background: rgba(100,160,180,.10); color: #5a9aaa; }
-    .tag-organic { background: rgba(120,170,100,.10); color: #6a9a55; }
-
-    .product-name {
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: var(--soft-brown);
-      line-height: 1.35;
-    }
-
-    .product-desc {
-      font-size: var(--fs-sm);
-      font-weight: 300;
-      color: var(--soft-brown-m);
-      line-height: 1.55;
-    }
-
-    .product-bottom {
-      margin-top: auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: .75rem;
-    }
-
-    .product-price {
-      font-size: var(--fs-price);
-      font-weight: 600;
-      color: var(--soft-brown);
-      letter-spacing: -.01em;
-    }
-
-    .product-price .currency {
-      font-size: var(--fs-xs);
-      font-weight: 400;
-      color: var(--soft-brown-m);
-      margin-left: .2rem;
-    }
-
-    html[dir="rtl"] .product-price .currency {
-      margin-left: 0;
-      margin-right: .2rem;
-    }
-
-    .btn-add {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: 1px solid var(--border-glass);
-      background: var(--white-glass);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      color: var(--rose-gold);
-      font-size: .85rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all var(--dur) var(--ease-out);
-      flex-shrink: 0;
-    }
-
-    .btn-add:hover {
-      background: var(--rose-gold);
-      color: #fff;
-      border-color: var(--rose-gold);
-      transform: scale(1.1);
-    }
-
-    .btn-add:active { transform: scale(.92); }
-
-    /* FOOTER */
-    .site-footer {
-      text-align: center;
-      padding: 2.5rem 0 1.5rem;
-      border-top: 1px solid rgba(255,255,255,0.3);
-      margin-top: 1rem;
-    }
-
-    .footer-brand {
-      font-size: 1.1rem;
-      font-weight: 600;
-      letter-spacing: .15em;
-      color: var(--soft-brown);
-      margin-bottom: .5rem;
-    }
-
-    .footer-copy {
-      font-size: var(--fs-xs);
-      color: var(--soft-brown-m);
-      font-weight: 300;
-    }
-
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin-top: 1rem;
-    }
-
-    .footer-links a {
-      font-size: 1rem;
-      color: var(--soft-brown-m);
-      transition: color var(--dur) var(--ease-out), transform var(--dur) var(--ease-out);
-      text-decoration: none;
-    }
-
-    .footer-links a:hover {
-      color: var(--rose-gold);
-      transform: translateY(-2px);
-    }
-
-    /* WHATSAPP */
-    .whatsapp-float {
-      position: fixed;
-      bottom: 1.75rem;
-      right: 1.75rem;
-      z-index: 9999;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.65rem;
-      color: #fff;
-      text-decoration: none;
-      background: rgba(37, 211, 102, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.25);
-      box-shadow: 0 4px 20px rgba(37, 211, 102, .30), 0 0 0 0 rgba(37, 211, 102, .40);
-      animation: wa-pulse 2.2s ease-out infinite;
-      transition: transform var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out);
-    }
-
-    html[dir="rtl"] .whatsapp-float { right: auto; left: 1.75rem; }
-
-    .whatsapp-float:hover {
-      transform: scale(1.12);
-      box-shadow: 0 6px 30px rgba(37, 211, 102, .40), 0 0 0 0 rgba(37, 211, 102, 0);
-      animation: none;
-    }
-
-    .whatsapp-float:active { transform: scale(.95); }
-
-    @keyframes wa-pulse {
-      0%   { box-shadow: 0 4px 20px rgba(37,211,102,.30), 0 0 0 0 rgba(37,211,102,.40); }
-      70%  { box-shadow: 0 4px 20px rgba(37,211,102,.30), 0 0 0 18px rgba(37,211,102,0); }
-      100% { box-shadow: 0 4px 20px rgba(37,211,102,.30), 0 0 0 0 rgba(37,211,102,0); }
-    }
-
-    .wa-tooltip {
-      position: absolute;
-      bottom: calc(100% + .6rem);
-      right: 0;
-      white-space: nowrap;
-      padding: .4rem .8rem;
-      border-radius: var(--radius-xs);
-      font-size: var(--fs-xs);
-      font-weight: 500;
-      color: var(--soft-brown);
-      background: rgba(255,255,255,0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid var(--border-glass);
-      box-shadow: var(--shadow-soft);
-      opacity: 0;
-      transform: translateY(4px);
-      transition: all .25s var(--ease-out);
-      pointer-events: none;
-    }
-
-    html[dir="rtl"] .wa-tooltip { right: auto; left: 0; }
-
-    .whatsapp-float:hover .wa-tooltip { opacity: 1; transform: translateY(0); }
-
-    /* TOAST */
-    .toast-container {
-      position: fixed;
-      bottom: 6rem;
-      right: 1.75rem;
-      z-index: 9998;
-      display: flex;
-      flex-direction: column;
-      gap: .5rem;
-      pointer-events: none;
-    }
-
-    html[dir="rtl"] .toast-container { right: auto; left: 1.75rem; }
-
-    .toast {
-      padding: .65rem 1.1rem;
-      border-radius: var(--radius-sm);
-      font-size: var(--fs-sm);
-      font-weight: 400;
-      color: var(--soft-brown);
-      background: rgba(255,255,255,0.88);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--border-glass);
-      box-shadow: var(--shadow-soft);
-      opacity: 0;
-      transform: translateY(10px) scale(.95);
-      animation: toast-in .35s var(--ease-out) forwards;
-      pointer-events: auto;
-    }
-
-    .toast.out { animation: toast-out .3s var(--ease-out) forwards; }
-
-    @keyframes toast-in  { to { opacity: 1; transform: translateY(0) scale(1); } }
-    @keyframes toast-out { to { opacity: 0; transform: translateY(-8px) scale(.95); } }
-
-    /* REVEAL (for hero / section head) */
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity .6s var(--ease-out), transform .6s var(--ease-out);
-    }
-
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
-      .products-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
-      .product-card { padding: 1.4rem 1.2rem; }
-      .hero { padding: 2rem 0 1.5rem; }
-      .brand-name { font-size: 1.4rem; }
-      .whatsapp-float { width: 54px; height: 54px; font-size: 1.4rem; bottom: 1.25rem; right: 1.25rem; }
-      html[dir="rtl"] .whatsapp-float { right: auto; left: 1.25rem; }
-    }
-
-    @media (max-width: 480px) {
-      .products-grid { grid-template-columns: 1fr; }
-      .nav { flex-wrap: wrap; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-    }
-
-    .lang-btn:focus-visible,
-    .btn-add:focus-visible,
-    .whatsapp-float:focus-visible,
-    .footer-links a:focus-visible {
-      outline: 2px solid var(--rose-gold);
-      outline-offset: 3px;
-    }
-
-    ::selection { background: rgba(183, 110, 121, .2); color: var(--soft-brown); }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LUXE — مستحضرات تجميل فاخرة</title>
+<meta name="description" content="LUXE — مستحضرات تجميل فاخرة للعناية بالبشرة والمكياج." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+--cream:#fdf6f0;--cream-deep:#f5ebe3;--warm-beige:#f0e6df;
+--soft-brown:#2c1810;--soft-brown-m:#5c4a42;
+--rose-gold:#b76e79;--rose-gold-l:#d4a0a7;
+--gold:#c9a84c;--gold-l:#e0c992;
+--white-glass:rgba(255,255,255,.22);--white-glass-s:rgba(255,255,255,.12);
+--border-glass:rgba(255,255,255,.35);--border-gold:rgba(201,168,76,.30);
+--shadow-soft:0 8px 32px rgba(44,24,16,.10);--shadow-card:0 4px 24px rgba(44,24,16,.08);
+--shadow-hover:0 12px 48px rgba(183,110,121,.18);
+--font-en:'Inter',sans-serif;--font-ar:'Noto Sans Arabic','Inter',sans-serif;
+--font-display:'Playfair Display',serif;
+--fs-hero:clamp(2rem,5vw,3.5rem);--fs-sub:clamp(1rem,2vw,1.25rem);
+--fs-body:1rem;--fs-sm:.875rem;--fs-xs:.75rem;--fs-price:1.25rem;
+--radius-xl:64px;--radius-lg:48px;--radius-md:24px;--radius-sm:16px;--radius-xs:10px;
+--max-w:1200px;--container-pad:clamp(1rem,4vw,2.5rem);
+--ease-out:cubic-bezier(.22,1,.36,1);--dur:.4s;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-ar);background:var(--cream);color:var(--soft-brown);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+html[dir="ltr"] body{font-family:var(--font-en)}
+body::before{content:'';position:fixed;inset:0;z-index:-2;background:radial-gradient(ellipse 80% 60% at 20% 10%,rgba(183,110,121,.12) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 80% 80%,rgba(201,168,76,.10) 0%,transparent 60%),radial-gradient(ellipse 90% 70% at 50% 50%,rgba(240,230,223,.8) 0%,var(--cream) 100%)}
+body::after{content:'';position:fixed;inset:0;z-index:-1;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px 200px;pointer-events:none}
+.glass{background:var(--white-glass);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);border:1px solid var(--border-glass)}
+.glass-card{background:rgba(255,255,255,.30);backdrop-filter:blur(20px) saturate(1.5);-webkit-backdrop-filter:blur(20px) saturate(1.5);border:1px solid rgba(255,255,255,.40);box-shadow:var(--shadow-card);transition:transform var(--dur) var(--ease-out),box-shadow var(--dur) var(--ease-out),border-color var(--dur) var(--ease-out)}
+.glass-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-hover);border-color:var(--border-gold)}
+.container{max-width:var(--max-w);margin:0 auto;padding:var(--container-pad)}
+/* HEADER */
+.site-header{position:sticky;top:0;z-index:100;padding:.75rem 0;transition:background var(--dur) var(--ease-out)}
+.site-header.scrolled{background:rgba(253,246,240,.80);backdrop-filter:blur(24px) saturate(1.5);-webkit-backdrop-filter:blur(24px) saturate(1.5);border-bottom:1px solid rgba(255,255,255,.3)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.brand{display:flex;flex-direction:column;gap:.1rem}
+.brand-name{font-size:1.75rem;font-weight:700;letter-spacing:.18em;color:var(--soft-brown);line-height:1;font-family:var(--font-display)}
+.brand-sub{font-size:var(--fs-xs);font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:var(--rose-gold)}
+.nav-links{display:flex;align-items:center;gap:1.5rem;list-style:none}
+.nav-links a{text-decoration:none;color:var(--soft-brown-m);font-size:var(--fs-sm);font-weight:500;transition:color var(--dur) var(--ease-out);position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;right:0;width:0;height:2px;background:var(--rose-gold);transition:width var(--dur) var(--ease-out)}
+html[dir="ltr"] .nav-links a::after{right:auto;left:0}
+.nav-links a:hover{color:var(--rose-gold)}
+.nav-links a:hover::after{width:100%}
+.nav-actions{display:flex;align-items:center;gap:.5rem}
+.nav-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;border-radius:100px;border:1px solid var(--border-glass);background:var(--white-glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:var(--soft-brown);font-size:var(--fs-sm);font-weight:500;cursor:pointer;transition:all var(--dur) var(--ease-out);font-family:inherit;white-space:nowrap}
+.nav-btn:hover{background:rgba(255,255,255,.40);border-color:var(--rose-gold-l);color:var(--rose-gold)}
+.nav-btn:active{transform:scale(.96)}
+.nav-btn i{font-size:.8rem;color:var(--rose-gold)}
+.cart-btn{position:relative;width:42px;height:42px;border-radius:50%;border:1px solid var(--border-glass);background:var(--white-glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:var(--soft-brown);font-size:.95rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all var(--dur) var(--ease-out)}
+.cart-btn:hover{background:rgba(255,255,255,.40);border-color:var(--rose-gold-l);color:var(--rose-gold)}
+.cart-count{position:absolute;top:-4px;left:-4px;width:20px;height:20px;border-radius:50%;background:var(--rose-gold);color:#fff;font-size:.65rem;font-weight:600;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(0);transition:all .3s var(--ease-out)}
+.cart-count.show{opacity:1;transform:scale(1)}
+html[dir="ltr"] .cart-count{left:auto;right:-4px}
+.mobile-menu-btn{display:none;width:42px;height:42px;border-radius:12px;border:1px solid var(--border-glass);background:var(--white-glass);backdrop-filter:blur(12px);color:var(--soft-brown);font-size:1.1rem;cursor:pointer;align-items:center;justify-content:center}
+/* HERO */
+.hero{text-align:center;padding:4rem 0 3rem}
+.hero-badge{display:inline-flex;align-items:center;gap:.4rem;padding:.4rem 1.2rem;border-radius:100px;font-size:var(--fs-xs);font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--rose-gold);border:1px solid var(--border-gold);background:rgba(201,168,76,.08);margin-bottom:1.5rem}
+.hero-badge i{font-size:.65rem}
+.hero h1{font-size:var(--fs-hero);font-weight:600;line-height:1.15;color:var(--soft-brown);margin-bottom:1rem;letter-spacing:-.02em}
+.hero h1 .accent{background:linear-gradient(135deg,var(--rose-gold),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:var(--fs-sub);font-weight:300;color:var(--soft-brown-m);max-width:560px;margin:0 auto;line-height:1.7}
+.hero-cta{display:flex;gap:1rem;justify-content:center;margin-top:2rem;flex-wrap:wrap}
+.btn-primary{padding:.75rem 2rem;border-radius:100px;border:none;background:linear-gradient(135deg,var(--rose-gold),var(--gold));color:#fff;font-size:var(--fs-body);font-weight:600;cursor:pointer;transition:all var(--dur) var(--ease-out);font-family:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(183,110,121,.30)}
+.btn-outline{padding:.75rem 2rem;border-radius:100px;border:1px solid var(--border-glass);background:var(--white-glass);backdrop-filter:blur(12px);color:var(--soft-brown);font-size:var(--fs-body);font-weight:500;cursor:pointer;transition:all var(--dur) var(--ease-out);font-family:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem}
+.btn-outline:hover{background:rgba(255,255,255,.40);border-color:var(--rose-gold-l);color:var(--rose-gold)}
+.divider{width:60px;height:2px;background:linear-gradient(90deg,transparent,var(--rose-gold-l),transparent);margin:2.5rem auto;border:none}
+.section-head{text-align:center;margin-bottom:2.5rem}
+.section-head h2{font-size:clamp(1.4rem,3vw,2rem);font-weight:600;color:var(--soft-brown);letter-spacing:-.01em;margin-bottom:.4rem}
+.section-head p{font-size:var(--fs-sm);color:var(--soft-brown-m);font-weight:300}
+/* FILTERS */
+.filters-bar{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;margin-bottom:2rem;padding:.75rem 1rem;border-radius:var(--radius-md);background:rgba(255,255,255,.25);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.35)}
+.filter-btn{padding:.4rem 1rem;border-radius:100px;border:1px solid transparent;background:transparent;color:var(--soft-brown-m);font-size:var(--fs-sm);font-weight:500;cursor:pointer;transition:all var(--dur) var(--ease-out);font-family:inherit;white-space:nowrap}
+.filter-btn:hover{background:rgba(255,255,255,.30);border-color:var(--border-glass)}
+.filter-btn.active{background:var(--rose-gold);color:#fff;border-color:var(--rose-gold)}
+.search-box{margin-right:auto;position:relative}
+html[dir="ltr"] .search-box{margin-right:0;margin-left:auto}
+.search-box input{width:200px;padding:.5rem 1rem .5rem 2.2rem;border-radius:100px;border:1px solid var(--border-glass);background:rgba(255,255,255,.30);color:var(--soft-brown);font-size:var(--fs-sm);font-family:inherit;outline:none;transition:all var(--dur) var(--ease-out)}
+html[dir="ltr"] .search-box input{padding:.5rem 2.2rem .5rem 1rem}
+.search-box input:focus{border-color:var(--rose-gold-l);background:rgba(255,255,255,.50);width:240px}
+.search-box input::placeholder{color:var(--soft-brown-m);opacity:.6}
+.search-box i{position:absolute;top:50%;right:.75rem;transform:translateY(-50%);color:var(--soft-brown-m);font-size:var(--fs-sm);opacity:.5}
+html[dir="ltr"] .search-box i{right:auto;left:.75rem}
+/* PRODUCT GRID */
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.5rem;padding-bottom:2rem}
+.product-card{border-radius:var(--radius-md);overflow:hidden;position:relative;cursor:pointer;opacity:0;transform:translateY(20px);transition:opacity .5s var(--ease-out),transform .5s var(--ease-out),box-shadow var(--dur) var(--ease-out),border-color var(--dur) var(--ease-out)}
+.product-card.shown{opacity:1;transform:translateY(0)}
+.product-card::before{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);transition:left .7s var(--ease-out);pointer-events:none;z-index:2}
+.product-card:hover::before{left:120%}
+.product-image{width:100%;height:220px;overflow:hidden;position:relative;background:linear-gradient(135deg,var(--cream-deep),var(--warm-beige))}
+.product-image img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease-out)}
+.product-card:hover .product-image img{transform:scale(1.08)}
+.product-image-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem;color:var(--rose-gold-l);background:linear-gradient(135deg,rgba(183,110,121,.06),rgba(201,168,76,.06))}
+.product-badge{position:absolute;top:.75rem;right:.75rem;padding:.2rem .65rem;border-radius:100px;font-size:.65rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;z-index:1}
+html[dir="ltr"] .product-badge{right:auto;left:.75rem}
+.badge-best{background:rgba(183,110,121,.85);color:#fff}
+.badge-new{background:rgba(201,168,76,.85);color:#fff}
+.badge-luxury{background:rgba(44,24,16,.75);color:#fff}
+.badge-clinic{background:rgba(90,154,170,.85);color:#fff}
+.badge-organic{background:rgba(106,154,85,.85);color:#fff}
+.product-info{padding:1.25rem}
+.product-category-label{font-size:var(--fs-xs);font-weight:500;color:var(--rose-gold);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.3rem}
+.product-name{font-size:1.05rem;font-weight:600;color:var(--soft-brown);line-height:1.35;margin-bottom:.3rem}
+.product-desc{font-size:var(--fs-sm);font-weight:300;color:var(--soft-brown-m);line-height:1.55;margin-bottom:.5rem}
+.product-rating{display:flex;align-items:center;gap:.3rem;margin-bottom:.5rem}
+.product-rating .stars{color:var(--gold);font-size:.7rem}
+.product-rating .rating-text{font-size:var(--fs-xs);color:var(--soft-brown-m)}
+.product-tags{display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:.75rem}
+.tag{padding:.15rem .5rem;border-radius:100px;font-size:.6rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase}
+.tag-personal{background:rgba(183,110,121,.10);color:var(--rose-gold)}
+.tag-professional{background:rgba(90,154,170,.10);color:#5a9aaa}
+.tag-clinic{background:rgba(90,154,170,.15);color:#4a8a9a}
+.product-bottom{display:flex;align-items:center;justify-content:space-between;gap:.75rem}
+.product-price{font-size:var(--fs-price);font-weight:600;color:var(--soft-brown)}
+.product-price .currency{font-size:var(--fs-xs);font-weight:400;color:var(--soft-brown-m);margin-inline-start:.2rem}
+.btn-add-cart{padding:.5rem 1rem;border-radius:100px;border:1px solid var(--border-glass);background:var(--white-glass);backdrop-filter:blur(8px);color:var(--rose-gold);font-size:var(--fs-sm);font-weight:500;cursor:pointer;display:flex;align-items:center;gap:.35rem;transition:all var(--dur) var(--ease-out);font-family:inherit;white-space:nowrap}
+.btn-add-cart:hover{background:var(--rose-gold);color:#fff;border-color:var(--rose-gold)}
+.btn-add-cart:active{transform:scale(.92)}
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;z-index:1000;background:rgba(44,24,16,.40);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .3s var(--ease-out)}
+.modal-overlay.active{opacity:1;pointer-events:auto}
+.modal{background:rgba(253,246,240,.95);backdrop-filter:blur(30px);border:1px solid rgba(255,255,255,.50);border-radius:var(--radius-md);max-width:800px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(44,24,16,.20);transform:translateY(20px) scale(.97);transition:transform .35s var(--ease-out);position:relative}
+.modal-overlay.active .modal{transform:translateY(0) scale(1)}
+.modal-close{position:absolute;top:1rem;left:1rem;width:36px;height:36px;border-radius:50%;border:1px solid var(--border-glass);background:rgba(255,255,255,.50);backdrop-filter:blur(8px);color:var(--soft-brown);font-size:.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;transition:all var(--dur) var(--ease-out)}
+html[dir="ltr"] .modal-close{left:auto;right:1rem}
+.modal-close:hover{background:var(--rose-gold);color:#fff;border-color:var(--rose-gold)}
+.modal-content{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.modal-gallery{position:relative;min-height:350px;background:linear-gradient(135deg,var(--cream-deep),var(--warm-beige))}
+.modal-gallery img{width:100%;height:100%;object-fit:cover;min-height:350px}
+.modal-thumbnails{position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);display:flex;gap:.5rem}
+.modal-thumb{width:48px;height:48px;border-radius:8px;overflow:hidden;border:2px solid rgba(255,255,255,.50);cursor:pointer;opacity:.7;transition:all var(--dur) var(--ease-out)}
+.modal-thumb.active{opacity:1;border-color:var(--rose-gold)}
+.modal-thumb img{width:100%;height:100%;object-fit:cover}
+.modal-details{padding:2rem;display:flex;flex-direction:column;gap:1rem}
+.modal-details .product-name{font-size:1.4rem}
+.modal-details .product-desc{font-size:var(--fs-body);line-height:1.6}
+.modal-section-title{font-size:var(--fs-sm);font-weight:600;color:var(--soft-brown);margin-top:.5rem;display:flex;align-items:center;gap:.4rem}
+.modal-section-title i{font-size:.75rem;color:var(--rose-gold)}
+.modal-ingredients,.modal-usage{font-size:var(--fs-sm);color:var(--soft-brown-m);line-height:1.6;padding:.75rem;border-radius:var(--radius-sm);background:rgba(255,255,255,.30);border:1px solid rgba(255,255,255,.30)}
+.modal-qty{display:flex;align-items:center;gap:.75rem;margin-top:.5rem}
+.qty-control{display:flex;align-items:center;border-radius:100px;border:1px solid var(--border-glass);overflow:hidden;background:rgba(255,255,255,.30)}
+.qty-btn{width:36px;height:36px;border:none;background:transparent;color:var(--soft-brown);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background var(--dur) var(--ease-out)}
+.qty-btn:hover{background:rgba(255,255,255,.40)}
+.qty-value{width:40px;text-align:center;font-size:var(--fs-body);font-weight:600;color:var(--soft-brown)}
+.modal-actions{display:flex;gap:.75rem;margin-top:.5rem;flex-wrap:wrap}
+.modal-actions .btn-primary{flex:1;justify-content:center}
+.btn-whatsapp{padding:.75rem 1.5rem;border-radius:100px;border:none;background:rgba(37,211,102,.85);backdrop-filter:blur(8px);color:#fff;font-size:var(--fs-body);font-weight:600;cursor:pointer;transition:all var(--dur) var(--ease-out);font-family:inherit;display:inline-flex;align-items:center;gap:.5rem;text-decoration:none}
+.btn-whatsapp:hover{background:rgba(37,211,102,1);transform:translateY(-2px);box-shadow:0 6px 20px rgba(37,211,102,.30)}
+/* CART SIDEBAR */
+.cart-overlay{position:fixed;inset:0;z-index:999;background:rgba(44,24,16,.30);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .3s var(--ease-out)}
+.cart-overlay.active{opacity:1;pointer-events:auto}
+.cart-sidebar{position:fixed;top:0;left:0;width:380px;max-width:90vw;height:100vh;z-index:1000;background:rgba(253,246,240,.95);backdrop-filter:blur(30px);border-inline-start:1px solid rgba(255,255,255,.50);box-shadow:-10px 0 40px rgba(44,24,16,.15);transform:translateX(-100%);transition:transform .35s var(--ease-out);display:flex;flex-direction:column;overflow:hidden}
+html[dir="ltr"] .cart-sidebar{left:auto;right:0;border-inline-start:none;border-inline-end:1px solid rgba(255,255,255,.50);box-shadow:10px 0 40px rgba(44,24,16,.15);transform:translateX(100%)}
+.cart-sidebar.active{transform:translateX(0)}
+.cart-header{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.5rem;border-bottom:1px solid rgba(255,255,255,.30)}
+.cart-header h3{font-size:1.1rem;font-weight:600;display:flex;align-items:center;gap:.5rem}
+.cart-header h3 i{color:var(--rose-gold);font-size:.9rem}
+.cart-close{width:32px;height:32px;border-radius:50%;border:1px solid var(--border-glass);background:rgba(255,255,255,.30);color:var(--soft-brown);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.8rem;transition:all var(--dur) var(--ease-out)}
+.cart-close:hover{background:var(--rose-gold);color:#fff;border-color:var(--rose-gold)}
+.cart-items{flex:1;overflow-y:auto;padding:1rem 1.5rem}
+.cart-empty{text-align:center;padding:3rem 1rem;color:var(--soft-brown-m)}
+.cart-empty i{font-size:2.5rem;color:var(--rose-gold-l);margin-bottom:1rem;display:block}
+.cart-empty p{font-size:var(--fs-sm);font-weight:300}
+.cart-item{display:flex;gap:1rem;padding:1rem 0;border-bottom:1px solid rgba(255,255,255,.25);align-items:center}
+.cart-item-img{width:64px;height:64px;border-radius:var(--radius-sm);overflow:hidden;flex-shrink:0;background:var(--cream-deep)}
+.cart-item-img img{width:100%;height:100%;object-fit:cover}
+.cart-item-info{flex:1;min-width:0}
+.cart-item-name{font-size:var(--fs-sm);font-weight:600;color:var(--soft-brown);margin-bottom:.2rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cart-item-price{font-size:var(--fs-sm);color:var(--rose-gold);font-weight:500}
+.cart-item-qty{display:flex;align-items:center;gap:0;margin-top:.3rem}
+.cart-item-qty button{width:24px;height:24px;border-radius:50%;border:1px solid var(--border-glass);background:rgba(255,255,255,.30);color:var(--soft-brown);font-size:.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all var(--dur) var(--ease-out)}
+.cart-item-qty button:hover{background:var(--rose-gold);color:#fff;border-color:var(--rose-gold)}
+.cart-item-qty span{width:28px;text-align:center;font-size:var(--fs-sm);font-weight:600}
+.cart-item-remove{width:28px;height:28px;border-radius:50%;border:none;background:rgba(220,80,80,.10);color:#dc5050;font-size:.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all var(--dur) var(--ease-out);flex-shrink:0}
+.cart-item-remove:hover{background:#dc5050;color:#fff}
+.cart-footer{padding:1.25rem 1.5rem;border-top:1px solid rgba(255,255,255,.30)}
+.cart-total{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.cart-total-label{font-size:var(--fs-sm);color:var(--soft-brown-m)}
+.cart-total-value{font-size:1.25rem;font-weight:700;color:var(--soft-brown)}
+.cart-checkout{width:100%;padding:.75rem;border-radius:100px;border:none;background:linear-gradient(135deg,var(--rose-gold),var(--gold));color:#fff;font-size:var(--fs-body);font-weight:600;cursor:pointer;transition:all var(--dur) var(--ease-out);font-family:inherit}
+.cart-checkout:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(183,110,121,.30)}
+/* FEATURES */
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;padding:3rem 0}
+.feature-card{text-align:center;padding:2rem 1.5rem;border-radius:var(--radius-md)}
+.feature-icon{width:64px;height:64px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--rose-gold);background:linear-gradient(135deg,rgba(183,110,121,.08),rgba(201,168,76,.08));border:1px solid rgba(183,110,121,.12);margin:0 auto 1rem}
+.feature-card h3{font-size:var(--fs-body);font-weight:600;color:var(--soft-brown);margin-bottom:.5rem}
+.feature-card p{font-size:var(--fs-sm);color:var(--soft-brown-m);font-weight:300;line-height:1.6}
+/* TESTIMONIALS */
+.testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;padding-bottom:2rem}
+.testimonial-card{padding:1.75rem;border-radius:var(--radius-md)}
+.testimonial-stars{color:var(--gold);font-size:.8rem;margin-bottom:.75rem}
+.testimonial-text{font-size:var(--fs-sm);color:var(--soft-brown);line-height:1.7;margin-bottom:1rem;font-style:italic}
+.testimonial-author{display:flex;align-items:center;gap:.75rem}
+.testimonial-avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--rose-gold-l),var(--gold-l));display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:600;color:#fff}
+.testimonial-name{font-size:var(--fs-sm);font-weight:600;color:var(--soft-brown)}
+.testimonial-role{font-size:var(--fs-xs);color:var(--soft-brown-m)}
+/* TIPS */
+.tips-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;padding-bottom:2rem}
+.tip-card{padding:1.75rem;border-radius:var(--radius-md)}
+.tip-icon{font-size:1.5rem;color:var(--rose-gold);margin-bottom:.75rem}
+.tip-card h3{font-size:var(--fs-body);font-weight:600;color:var(--soft-brown);margin-bottom:.5rem}
+.tip-card p{font-size:var(--fs-sm);color:var(--soft-brown-m);font-weight:300;line-height:1.65}
+/* FOOTER */
+.site-footer{padding:3rem 0 1.5rem;border-top:1px solid rgba(255,255,255,.3);margin-top:2rem}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:2rem;margin-bottom:2rem}
+.footer-brand-section .brand-name{margin-bottom:.5rem;display:block}
+.footer-brand-section p{font-size:var(--fs-sm);color:var(--soft-brown-m);line-height:1.6;margin-bottom:1rem}
+.footer-social{display:flex;gap:.75rem}
+.footer-social a{width:36px;height:36px;border-radius:50%;border:1px solid var(--border-glass);background:var(--white-glass);color:var(--soft-brown-m);display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:.85rem;transition:all var(--dur) var(--ease-out)}
+.footer-social a:hover{background:var(--rose-gold);color:#fff;border-color:var(--rose-gold);transform:translateY(-2px)}
+.footer-col h4{font-size:var(--fs-sm);font-weight:600;color:var(--soft-brown);margin-bottom:1rem}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:.5rem}
+.footer-col a{text-decoration:none;color:var(--soft-brown-m);font-size:var(--fs-sm);transition:color var(--dur) var(--ease-out)}
+.footer-col a:hover{color:var(--rose-gold)}
+.footer-contact-item{display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem;font-size:var(--fs-sm);color:var(--soft-brown-m)}
+.footer-contact-item i{color:var(--rose-gold);font-size:.85rem;width:18px;text-align:center}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.25);flex-wrap:wrap;gap:1rem}
+.footer-copy{font-size:var(--fs-xs);color:var(--soft-brown-m)}
+.footer-payments{display:flex;gap:.5rem;align-items:center}
+.footer-payments span{font-size:var(--fs-xs);color:var(--soft-brown-m)}
+.payment-icon{width:32px;height:20px;border-radius:4px;background:rgba(255,255,255,.50);border:1px solid rgba(255,255,255,.30);display:flex;align-items:center;justify-content:center;font-size:.55rem;font-weight:600;color:var(--soft-brown-m)}
+/* WHATSAPP */
+.whatsapp-float{position:fixed;bottom:1.75rem;right:1.75rem;z-index:9999}
+html[dir="ltr"] .whatsapp-float{right:auto;left:1.75rem}
+.whatsapp-main{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.65rem;color:#fff;text-decoration:none;background:rgba(37,211,102,.85);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.25);box-shadow:0 4px 20px rgba(37,211,102,.30),0 0 0 0 rgba(37,211,102,.40);animation:wa-pulse 2.2s ease-out infinite;transition:transform var(--dur) var(--ease-out),box-shadow var(--dur) var(--ease-out);cursor:pointer;position:relative}
+.whatsapp-main:hover{transform:scale(1.12);box-shadow:0 6px 30px rgba(37,211,102,.40);animation:none}
+.whatsapp-main:active{transform:scale(.95)}
+@keyframes wa-pulse{0%{box-shadow:0 4px 20px rgba(37,211,102,.30),0 0 0 0 rgba(37,211,102,.40)}70%{box-shadow:0 4px 20px rgba(37,211,102,.30),0 0 0 18px rgba(37,211,102,0)}100%{box-shadow:0 4px 20px rgba(37,211,102,.30),0 0 0 0 rgba(37,211,102,0)}}
+.wa-tooltip{position:absolute;bottom:calc(100% + .6rem);right:0;white-space:nowrap;padding:.4rem .8rem;border-radius:var(--radius-xs);font-size:var(--fs-xs);font-weight:500;color:var(--soft-brown);background:rgba(255,255,255,.90);backdrop-filter:blur(12px);border:1px solid var(--border-glass);box-shadow:var(--shadow-soft);opacity:0;transform:translateY(4px);transition:all .25s var(--ease-out);pointer-events:none}
+html[dir="ltr"] .wa-tooltip{right:auto;left:0}
+.whatsapp-main:hover .wa-tooltip{opacity:1;transform:translateY(0)}
+.wa-options{position:absolute;bottom:calc(100% + .75rem);right:0;width:220px;border-radius:var(--radius-sm);background:rgba(253,246,240,.95);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.50);box-shadow:0 12px 40px rgba(44,24,16,.15);padding:.75rem;opacity:0;transform:translateY(10px) scale(.95);pointer-events:none;transition:all .3s var(--ease-out)}
+html[dir="ltr"] .wa-options{right:auto;left:0}
+.wa-options.show{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+.wa-options-title{font-size:var(--fs-xs);font-weight:600;color:var(--soft-brown);padding:.25rem .5rem .5rem}
+.wa-option{display:flex;align-items:center;gap:.5rem;padding:.5rem;border-radius:var(--radius-xs);text-decoration:none;color:var(--soft-brown);font-size:var(--fs-sm);transition:background var(--dur) var(--ease-out)}
+.wa-option:hover{background:rgba(255,255,255,.50)}
+.wa-option i{font-size:.85rem;color:#25d366;width:20px;text-align:center}
+/* TOAST */
+.toast-container{position:fixed;bottom:6rem;right:1.75rem;z-index:9998;display:flex;flex-direction:column;gap:.5rem;pointer-events:none}
+html[dir="ltr"] .toast-container{right:auto;left:1.75rem}
+.toast{padding:.65rem 1.1rem;border-radius:var(--radius-sm);font-size:var(--fs-sm);font-weight:400;color:var(--soft-brown);background:rgba(255,255,255,.90);backdrop-filter:blur(16px);border:1px solid var(--border-glass);box-shadow:var(--shadow-soft);opacity:0;transform:translateY(10px) scale(.95);animation:toast-in .35s var(--ease-out) forwards;pointer-events:auto}
+.toast.out{animation:toast-out .3s var(--ease-out) forwards}
+@keyframes toast-in{to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes toast-out{to{opacity:0;transform:translateY(-8px) scale(.95)}}
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s var(--ease-out),transform .6s var(--ease-out)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+/* MOBILE NAV */
+.mobile-nav{display:none;position:fixed;inset:0;z-index:1001;background:rgba(253,246,240,.97);backdrop-filter:blur(24px);flex-direction:column;align-items:center;justify-content:center;gap:2rem}
+.mobile-nav.show{display:flex}
+.mobile-nav a{text-decoration:none;color:var(--soft-brown);font-size:1.25rem;font-weight:500;transition:color var(--dur) var(--ease-out)}
+.mobile-nav a:hover{color:var(--rose-gold)}
+.mobile-nav-close{position:absolute;top:1.5rem;left:1.5rem;width:40px;height:40px;border-radius:50%;border:1px solid var(--border-glass);background:rgba(255,255,255,.30);color:var(--soft-brown);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
+html[dir="ltr"] .mobile-nav-close{left:auto;right:1.5rem}
+.no-results{text-align:center;padding:3rem 1rem;color:var(--soft-brown-m);grid-column:1/-1}
+.no-results i{font-size:2.5rem;color:var(--rose-gold-l);margin-bottom:1rem;display:block}
+/* RESPONSIVE */
+@media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr}.modal-content{grid-template-columns:1fr}.modal-gallery{min-height:250px}.modal-gallery img{min-height:250px}}
+@media(max-width:768px){.nav-links{display:none}.mobile-menu-btn{display:flex}.products-grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem}.hero{padding:2.5rem 0 2rem}.brand-name{font-size:1.4rem}.footer-grid{grid-template-columns:1fr;gap:1.5rem}.search-box input{width:140px}.search-box input:focus{width:160px}}
+@media(max-width:480px){.products-grid{grid-template-columns:1fr}.hero h1{font-size:1.6rem}.hero-cta{flex-direction:column;align-items:center}.cart-sidebar{width:100%;max-width:100vw}.modal{border-radius:var(--radius-sm);margin:.5rem}.modal-details{padding:1.25rem}.features-grid{grid-template-columns:1fr}.testimonials-grid{grid-template-columns:1fr}.tips-grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important}}
+.nav-btn:focus-visible,.cart-btn:focus-visible,.btn-add-cart:focus-visible,.whatsapp-main:focus-visible,.footer-col a:focus-visible{outline:2px solid var(--rose-gold);outline-offset:3px}
+::selection{background:rgba(183,110,121,.2);color:var(--soft-brown)}
+</style>
 </head>
-
 <body>
-  <div class="main-wrapper">
-
-    <header class="site-header" id="siteHeader">
-      <div class="container">
-        <nav class="nav" role="navigation" aria-label="Main navigation">
-          <div class="brand">
-            <span class="brand-name">LUXE</span>
-            <span class="brand-sub" id="brandSub">Premium Cosmetics</span>
-          </div>
-          <div class="nav-actions">
-            <button class="lang-btn" id="langToggle" aria-label="Switch language" type="button">
-              <i class="fa-solid fa-globe"></i>
-              <span id="langLabel">العربية</span>
-            </button>
-          </div>
-        </nav>
-      </div>
-    </header>
-
-    <main>
-      <section class="hero container" aria-label="Hero">
-        <div class="reveal" id="heroContent">
-          <div class="hero-badge">
-            <i class="fa-solid fa-sparkles"></i>
-            <span id="heroBadgeText">Luxury Beauty Collection</span>
-          </div>
-          <h1 id="heroTitle">Discover Your <span class="accent">Radiant</span> Beauty</h1>
-          <p id="heroDesc">Indulge in our curated collection of premium cosmetics, crafted with the finest ingredients for timeless elegance.</p>
-        </div>
-        <hr class="divider" />
-      </section>
-
-      <section class="container" aria-label="Products">
-        <div class="section-head reveal">
-          <h2 id="sectionTitle">Our Collection</h2>
-          <p id="sectionDesc">Handpicked essentials for your beauty ritual</p>
-        </div>
-        <div class="products-grid" id="productsGrid" role="list"></div>
-      </section>
-    </main>
-
-    <footer class="site-footer container">
-      <div class="reveal">
-        <div class="footer-brand">LUXE</div>
-        <p class="footer-copy" id="footerCopy">&copy; 2025 LUXE Cosmetics. All rights reserved.</p>
-        <div class="footer-links">
-          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-          <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-          <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
-        </div>
-      </div>
-    </footer>
-  </div>
-
-  <!--
-    📌 TO CUSTOMIZE WHATSAPP:
-    Replace 201234567890 with your actual number (country code, no +)
-  -->
-  <a href="https://wa.me/201234567890?text=Hello%20LUXE!%20I%27m%20interested%20in%20your%20products."
-     class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
-    <i class="fa-brands fa-whatsapp"></i>
-    <span class="wa-tooltip" id="waTooltip">Chat with us</span>
-  </a>
-
-  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
-
-  <script>
-    /* ==============================================
-       PRODUCT DATABASE
-       ==============================================
-       📌 SUPABASE INTEGRATION POINT:
-       Replace this array with:
-         async function fetchProducts() {
-           const { data, error } = await supabase
-             .from('products').select('*').order('id');
-           if (error) console.error(error);
-           return data;
-         }
-       Table: id, name_en, name_ar, desc_en, desc_ar, price, icon, tag
-       ============================================== */
-    const products = [
-      {
-        id: 1,
-        nameEn: 'Radiant Glow Serum',
-        nameAr: 'سيروم توهج مشع',
-        descEn: 'Vitamin C + Hyaluronic Acid, 30ml',
-        descAr: 'فيتامين سي + حمض الهيالورونيك، ٣٠ مل',
-        price: 1890,
-        icon: 'fa-droplet',
-        tag: 'best seller'
-      },
-      {
-        id: 2,
-        nameEn: 'Velvet Matte Lipstick',
-        nameAr: 'أحمر شفاه مات مخملي',
-        descEn: 'Long-wear formula, Shade: Rose Dusk',
-        descAr: 'تركيبة طويلة الثبات، درجة: غسق الورد',
-        price: 750,
-        icon: 'fa-heart',
-        tag: 'best seller'
-      },
-      {
-        id: 3,
-        nameEn: 'Golden Hour Highlighter',
-        nameAr: 'هايلايتر الساعة الذهبية',
-        descEn: 'Champagne shimmer, 12g',
-        descAr: 'لمعان شمباني، ١٢ جرام',
-        price: 1350,
-        icon: 'fa-sun',
-        tag: 'new'
-      },
-      {
-        id: 4,
-        nameEn: 'Silk Foundation',
-        nameAr: 'أساس الحرير',
-        descEn: 'Lightweight buildable coverage, 30ml',
-        descAr: 'تغطية خفيفة قابلة للبناء، ٣٠ مل',
-        price: 1650,
-        icon: 'fa-bottle-droplet',
-        tag: 'luxury'
-      },
-      {
-        id: 5,
-        nameEn: 'Deep Hydration Cream',
-        nameAr: 'كريم ترطيب عميق',
-        descEn: 'Ceramides + Squalane, 50ml',
-        descAr: 'سيراميد + سكوالين، ٥٠ مل',
-        price: 1200,
-        icon: 'fa-mug-hot',
-        tag: 'hydrating'
-      },
-      {
-        id: 6,
-        nameEn: 'Rose Petal Mist',
-        nameAr: 'ميست بتلات الورد',
-        descEn: 'Rose water + Niacinamide, 120ml',
-        descAr: 'ماء الورد + نياسيناميد، ١٢٠ مل',
-        price: 680,
-        icon: 'fa-spray-can-sparkles',
-        tag: 'organic'
-      },
-      {
-        id: 7,
-        nameEn: 'Midnight Eye Cream',
-        nameAr: 'كريم العين منتصف الليل',
-        descEn: 'Retinol + Peptides, 15ml',
-        descAr: 'ريتينول + ببتيدات، ١٥ مل',
-        price: 2100,
-        icon: 'fa-eye',
-        tag: 'luxury'
-      },
-      {
-        id: 8,
-        nameEn: 'Blush Bouquet',
-        nameAr: 'بوشيه البلاشر',
-        descEn: 'Powder blush, Shade: Peach Bloom',
-        descAr: 'بلاشر بودرة، درجة: تفتح الخوخ',
-        price: 890,
-        icon: 'fa-palette',
-        tag: 'new'
-      },
-      {
-        id: 9,
-        nameEn: 'Lash Crown Mascara',
-        nameAr: 'ماسكارا تاج الرموش',
-        descEn: 'Volume + Length waterproof, 10ml',
-        descAr: 'حجم + طول مقاوم للماء، ١٠ مل',
-        price: 720,
-        icon: 'fa-wand-magic-sparkles',
-        tag: 'best seller'
-      },
-      {
-        id: 10,
-        nameEn: 'Luxe Perfume Oil',
-        nameAr: 'زيت عطر فاخر',
-        descEn: 'Oud + Rose absolute, 12ml',
-        descAr: 'عود + مطلق الورد، ١٢ مل',
-        price: 2950,
-        icon: 'fa-gem',
-        tag: 'luxury'
-      }
-    ];
-
-    /* Tag → CSS class */
-    const tagClassMap = {
-      'best seller': 'tag-best',
-      'new':         'tag-new',
-      'luxury':      'tag-luxury',
-      'hydrating':   'tag-hydrate',
-      'organic':     'tag-organic'
-    };
-
-    /* Tag → translated label */
-    const tagTranslations = {
-      'best seller': { en: 'Best Seller', ar: 'الأكثر مبيعاً' },
-      'new':         { en: 'New',         ar: 'جديد' },
-      'luxury':      { en: 'Luxury',      ar: 'فاخر' },
-      'hydrating':   { en: 'Hydrating',   ar: 'مرطّب' },
-      'organic':     { en: 'Organic',     ar: 'عضوي' }
-    };
-
-    /* UI strings */
-    const ui = {
-      en: {
-        brandSub:    'Premium Cosmetics',
-        heroBadge:   'Luxury Beauty Collection',
-        heroTitle:   'Discover Your <span class="accent">Radiant</span> Beauty',
-        heroDesc:    'Indulge in our curated collection of premium cosmetics, crafted with the finest ingredients for timeless elegance.',
-        sectionTitle:'Our Collection',
-        sectionDesc: 'Handpicked essentials for your beauty ritual',
-        footerCopy:  '&copy; 2025 LUXE Cosmetics. All rights reserved.',
-        waTooltip:   'Chat with us',
-        langLabel:   'العربية',
-        currency:    'EGP',
-        addedToast:  'Added to wishlist ♥'
-      },
-      ar: {
-        brandSub:    'كوسميتكس فاخرة',
-        heroBadge:   'مجموعة جمال فاخرة',
-        heroTitle:   'اكتشفي <span class="accent">جمالك</span> المشع',
-        heroDesc:    'استمتعي بمجموعتنا المختارة من الكوسميتكس الفاخرة، مصنوعة من أجود المكونات لأناقة خالدة.',
-        sectionTitle:'مجموعتنا',
-        sectionDesc: 'أساسيات مختارة بعناية لطقوس جمالك',
-        footerCopy:  '&copy; ٢٠٢٥ LUXE كوسميتكس. جميع الحقوق محفوظة.',
-        waTooltip:   'تحدثي معنا',
-        langLabel:   'English',
-        currency:    'ج.م',
-        addedToast:  'تمت الإضافة للمفضلة ♥'
-      }
-    };
-
-    /* State */
-    let currentLang = sessionStorage.getItem('luxe-lang') || 'en';
-
-    /* Arabic numeral converter */
-    function formatPrice(num, lang) {
-      if (lang === 'ar') {
-        const d = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
-        return String(num).replace(/\d/g, c => d[c]);
-      }
-      return num.toLocaleString('en-US');
-    }
-
-    /* ==============================================
-       RENDER PRODUCTS
-       ============================================== */
-    function renderProducts(lang) {
-      const grid = document.getElementById('productsGrid');
-      grid.innerHTML = '';
-
-      products.forEach((p, i) => {
-        const name   = lang === 'ar' ? p.nameAr : p.nameEn;
-        const desc   = lang === 'ar' ? p.descAr : p.descEn;
-        const price  = formatPrice(p.price, lang);
-        const curr   = ui[lang].currency;
-        const tagTxt = (tagTranslations[p.tag] && tagTranslations[p.tag][lang]) || p.tag;
-        const tagCls = tagClassMap[p.tag] || 'tag-best';
-
-        const card = document.createElement('div');
-        card.className = 'product-card glass-card';
-        card.setAttribute('role', 'listitem');
-        /* Stagger delay via CSS transition-delay */
-        card.style.transitionDelay = (i * 70) + 'ms';
-
-        card.innerHTML =
-          '<span class="product-tag ' + tagCls + '">' + tagTxt + '</span>' +
-          '<div class="product-icon"><i class="fa-solid ' + p.icon + '"></i></div>' +
-          '<div class="product-name">' + name + '</div>' +
-          '<div class="product-desc">' + desc + '</div>' +
-          '<div class="product-bottom">' +
-            '<div class="product-price">' + price + '<span class="currency">' + curr + '</span></div>' +
-            '<button class="btn-add" aria-label="Add ' + name + ' to wishlist" type="button" data-id="' + p.id + '">' +
-              '<i class="fa-solid fa-plus"></i>' +
-            '</button>' +
-          '</div>';
-
-        grid.appendChild(card);
-      });
-
-      /* ✅ FIX: Use setTimeout to guarantee the browser has painted
-         the initial opacity:0 state BEFORE we add .shown.
-         requestAnimationFrame alone is not reliable — browsers
-         may batch the initial paint and skip the transition. */
-      setTimeout(function() {
-        var cards = grid.querySelectorAll('.product-card');
-        cards.forEach(function(c) { c.classList.add('shown'); });
-      }, 60);
-
-      /* Attach wishlist button handlers */
-      grid.querySelectorAll('.btn-add').forEach(function(btn) {
-        btn.addEventListener('click', function(e) {
-          var id = e.currentTarget.getAttribute('data-id');
-          var product = products.find(function(p) { return p.id == id; });
-          if (product) {
-            var pName = lang === 'ar' ? product.nameAr : product.nameEn;
-            showToast(pName + ' — ' + ui[lang].addedToast);
-          }
-        });
-      });
-    }
-
-    /* Update all UI text */
-    function updateUI(lang) {
-      var t = ui[lang];
-      document.getElementById('brandSub').textContent      = t.brandSub;
-      document.getElementById('heroBadgeText').textContent   = t.heroBadge;
-      document.getElementById('heroTitle').innerHTML         = t.heroTitle;
-      document.getElementById('heroDesc').textContent        = t.heroDesc;
-      document.getElementById('sectionTitle').textContent    = t.sectionTitle;
-      document.getElementById('sectionDesc').textContent     = t.sectionDesc;
-      document.getElementById('footerCopy').innerHTML        = t.footerCopy;
-      document.getElementById('waTooltip').textContent       = t.waTooltip;
-      document.getElementById('langLabel').textContent       = t.langLabel;
-    }
-
-    /* Set language */
-    function setLang(lang) {
-      currentLang = lang;
-      sessionStorage.setItem('luxe-lang', lang);
-      document.documentElement.setAttribute('lang', lang);
-      document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
-      updateUI(lang);
-      renderProducts(lang);
-    }
-
-    document.getElementById('langToggle').addEventListener('click', function() {
-      setLang(currentLang === 'en' ? 'ar' : 'en');
-    });
-
-    /* Toast */
-    function showToast(message) {
-      var container = document.getElementById('toastContainer');
-      var toast = document.createElement('div');
-      toast.className = 'toast';
-      toast.textContent = message;
-      container.appendChild(toast);
-      setTimeout(function() {
-        toast.classList.add('out');
-        toast.addEventListener('animationend', function() { toast.remove(); });
-      }, 2200);
-    }
-
-    /* Header scroll effect */
-    var header = document.getElementById('siteHeader');
-    var ticking = false;
-    window.addEventListener('scroll', function() {
-      if (!ticking) {
-        requestAnimationFrame(function() {
-          header.classList.toggle('scrolled', window.scrollY > 30);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    });
-
-    /* Scroll reveal for hero / section-head / footer */
-    function initReveal() {
-      var observer = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
-      document.querySelectorAll('.reveal').forEach(function(el) {
-        observer.observe(el);
-      });
-    }
-
-    /* Init */
-    document.addEventListener('DOMContentLoaded', function() {
-      setLang(currentLang);
-      initReveal();
-    });
-  </script>
-
-  <!--
-  ==============================================
-  📌 DEPLOYMENT & CUSTOMIZATION NOTES
-  ==============================================
-
-  1. CONNECTING TO SUPABASE:
-     - Create project at https://supabase.com
-     - Table 'products': id (int8 PK), name_en (text), name_ar (text),
-       desc_en (text), desc_ar (text), price (float8), icon (text), tag (text)
-     - Add CDN: <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-     - Init: const supabase = supabase.createClient('URL','ANON_KEY')
-     - Replace static array with async fetch (see JS comments)
-
-  2. DEPLOY TO VERCEL:
-     - Save as index.html → push to GitHub → import in Vercel
-
-  3. CUSTOMIZE WHATSAPP:
-     - Replace 201234567890 in the <a href> near bottom of file
-
-  4. ADD/REMOVE PRODUCTS:
-     - Edit the products array in JS
-     - Each: id, nameEn, nameAr, descEn, descAr, price, icon, tag
-
-  5. COLORS:
-     - Edit :root CSS variables: --cream, --soft-brown, --rose-gold, --gold
-  ==============================================
-  -->
+<header class="site-header" id="siteHeader">
+<div class="container">
+<nav class="nav" role="navigation" aria-label="Main navigation">
+<div class="brand"><span class="brand-name">LUXE</span><span class="brand-sub" id="brandSub">كوسميتكس فاخرة</span></div>
+<ul class="nav-links" id="navLinks">
+<li><a href="#hero" data-i18n="nav_home">الرئيسية</a></li>
+<li><a href="#products" data-i18n="nav_products">المنتجات</a></li>
+<li><a href="#about" data-i18n="nav_about">عن العلامة</a></li>
+<li><a href="#tips" data-i18n="nav_tips">نصائح</a></li>
+<li><a href="#contact" data-i18n="nav_contact">تواصل معنا</a></li>
+</ul>
+<div class="nav-actions">
+<button class="nav-btn" id="langToggle" aria-label="Switch language" type="button"><i class="fa-solid fa-globe"></i><span id="langLabel">English</span></button>
+<button class="cart-btn" id="cartBtn" aria-label="Shopping cart" type="button"><i class="fa-solid fa-bag-shopping"></i><span class="cart-count" id="cartCount">0</span></button>
+<button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu" type="button"><i class="fa-solid fa-bars"></i></button>
+</div>
+</nav>
+</div>
+</header>
+<div class="mobile-nav" id="mobileNav">
+<button class="mobile-nav-close" id="mobileNavClose" type="button"><i class="fa-solid fa-xmark"></i></button>
+<a href="#hero" onclick="closeMobileNav()" data-i18n="nav_home">الرئيسية</a>
+<a href="#products" onclick="closeMobileNav()" data-i18n="nav_products">المنتجات</a>
+<a href="#about" onclick="closeMobileNav()" data-i18n="nav_about">عن العلامة</a>
+<a href="#tips" onclick="closeMobileNav()" data-i18n="nav_tips">نصائح</a>
+<a href="#contact" onclick="closeMobileNav()" data-i18n="nav_contact">تواصل معنا</a>
+</div>
+<main>
+<section class="hero container" id="hero" aria-label="Hero">
+<div class="reveal" id="heroContent">
+<div class="hero-badge"><i class="fa-solid fa-sparkles"></i><span data-i18n="hero_badge">مجموعة جمال فاخرة</span></div>
+<h1 id="heroTitle">اكتشفي <span class="accent">جمالك</span> المشع</h1>
+<p id="heroDesc">استمتعي بمجموعتنا المختارة من مستحضرات التجميل الفاخرة، مصنوعة من أجود المكونات لأناقة خالدة وعناية متكاملة ببشرتك.</p>
+<div class="hero-cta">
+<a href="#products" class="btn-primary" data-i18n="hero_cta">تسوقي الآن <i class="fa-solid fa-arrow-left"></i></a>
+<a href="#about" class="btn-outline" data-i18n="hero_cta2">اكتشفي المزيد</a>
+</div>
+</div>
+<hr class="divider" />
+</section>
+<section class="container" id="products" aria-label="Products">
+<div class="section-head reveal">
+<h2 data-i18n="section_title">مجموعتنا</h2>
+<p data-i18n="section_desc">منتجات مختارة بعناية لطقوس جمالك اليومية</p>
+</div>
+<div class="filters-bar reveal" id="filtersBar">
+<button class="filter-btn active" data-filter="all" data-i18n="filter_all">الكل</button>
+<button class="filter-btn" data-filter="skincare" data-i18n="filter_skincare">العناية بالبشرة</button>
+<button class="filter-btn" data-filter="makeup" data-i18n="filter_makeup">المكياج</button>
+<button class="filter-btn" data-filter="hair" data-i18n="filter_hair">الشعر</button>
+<button class="filter-btn" data-filter="perfume" data-i18n="filter_perfume">العطور والزيوت</button>
+<button class="filter-btn" data-filter="clinic" data-i18n="filter_clinic">للعيادات ★</button>
+<div class="search-box"><i class="fa-solid fa-magnifying-glass"></i><input type="text" id="searchInput" placeholder="بحث عن منتج..." /></div>
+</div>
+<div class="products-grid" id="productsGrid" role="list"></div>
+</section>
+<hr class="divider" />
+<section class="container" id="about" aria-label="Features">
+<div class="section-head reveal">
+<h2 data-i18n="features_title">لماذا LUXE؟</h2>
+<p data-i18n="features_desc">نقدم لكِ أفضل المنتجات بأعلى معايير الجودة</p>
+</div>
+<div class="features-grid">
+<div class="feature-card glass-card reveal"><div class="feature-icon"><i class="fa-solid fa-flask"></i></div><h3 data-i18n="feat1_title">مكونات فاخرة</h3><p data-i18n="feat1_desc">مصنوعة من أجود المكونات الطبيعية والعلمية المختبرة لضمان أفضل النتائج لبشرتك.</p></div>
+<div class="feature-card glass-card reveal"><div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div><h3 data-i18n="feat2_title">جودة مضمونة</h3><p data-i18n="feat2_desc">منتجات معتمدة من أطباء الجلدية والتجميل، آمنة وفعالة لجميع أنواع البشرة.</p></div>
+<div class="feature-card glass-card reveal"><div class="feature-icon"><i class="fa-solid fa-truck-fast"></i></div><h3 data-i18n="feat3_title">توصيل سريع</h3><p data-i18n="feat3_desc">توصيل لباب البيت في جميع أنحاء مصر. تغليف فاخر يحافظ على سلامة المنتج.</p></div>
+<div class="feature-card glass-card reveal"><div class="feature-icon"><i class="fa-solid fa-user-doctor"></i></div><h3 data-i18n="feat4_title">استشارات متخصصة</h3><p data-i18n="feat4_desc">فريق من الخبراء جاهز لمساعدتك في اختيار المنتجات المناسبة لنوع بشرتك.</p></div>
+</div>
+</section>
+<hr class="divider" />
+<section class="container" id="testimonials" aria-label="Testimonials">
+<div class="section-head reveal">
+<h2 data-i18n="testimonials_title">تجارب عملائنا</h2>
+<p data-i18n="testimonials_desc">ماذا تقول النساء اللواتي جربن منتجاتنا</p>
+</div>
+<div class="testimonials-grid">
+<div class="testimonial-card glass-card reveal">
+<div class="testimonial-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+<p class="testimonial-text" data-i18n="test1_text">"سيروم التوهج غيّر بشرتي تماماً! بعد أسبوعين فقط أصبحت بشرتي أكثر إشراقاً ونعومة."</p>
+<div class="testimonial-author"><div class="testimonial-avatar">س</div><div><div class="testimonial-name" data-i18n="test1_name">سارة أحمد</div><div class="testimonial-role" data-i18n="test1_role">من القاهرة</div></div></div>
+</div>
+<div class="testimonial-card glass-card reveal">
+<div class="testimonial-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+<p class="testimonial-text" data-i18n="test2_text">"كريم الترطيب العميق أنقذ بشرتي الجافة هذا الشتاء. المكونات رائعة والملمس خفيف ومريح."</p>
+<div class="testimonial-author"><div class="testimonial-avatar">ن</div><div><div class="testimonial-name" data-i18n="test2_name">نورهان محمود</div><div class="testimonial-role" data-i18n="test2_role">طبيبة جلدية</div></div></div>
+</div>
+<div class="testimonial-card glass-card reveal">
+<div class="testimonial-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></div>
+<p class="testimonial-text" data-i18n="test3_text">"أحمر الشفاه المخملي ثبات رائع ولون طبيعي. أحب التشكيلة الفاخرة من LUXE."</p>
+<div class="testimonial-author"><div class="testimonial-avatar">م</div><div><div class="testimonial-name" data-i18n="test3_name">مريم حسن</div><div class="testimonial-role" data-i18n="test3_role">خبيرة تجميل</div></div></div>
+</div>
+</div>
+</section>
+<hr class="divider" />
+<section class="container" id="tips" aria-label="Skincare Tips">
+<div class="section-head reveal">
+<h2 data-i18n="tips_title">نصائح العناية بالبشرة</h2>
+<p data-i18n="tips_desc">إرشادات مخصصة للعناية ببشرتك حسب نوعها</p>
+</div>
+<div class="tips-grid">
+<div class="tip-card glass-card reveal"><div class="tip-icon"><i class="fa-solid fa-droplet"></i></div><h3 data-i18n="tip1_title">البشرة الجافة</h3><p data-i18n="tip1_desc">استخدمي كريم ترطيب عميق يحتوي على سيراميد وسكوالين. رطبي بشرتك مرتين يومياً مع تجنب الماء الساخن.</p></div>
+<div class="tip-card glass-card reveal"><div class="tip-icon"><i class="fa-solid fa-fire"></i></div><h3 data-i18n="tip2_title">البشرة الدهنية</h3><p data-i18n="tip2_desc">اختاري سيروم خفيف بتركيبة غير قابلة للسد. استخدمي منظف لطيف وواقي شمس خالٍ من الزيوت.</p></div>
+<div class="tip-card glass-card reveal"><div class="tip-icon"><i class="fa-solid fa-heart"></i></div><h3 data-i18n="tip3_title">البشرة الحساسة</h3><p data-i18n="tip3_desc">تجنبي المنتجات العطرية والكحول. اختاري مكونات طبيعية مثل ألوة فيرا ولافندر للهدوء والتئام البشرة.</p></div>
+<div class="tip-card glass-card reveal"><div class="tip-icon"><i class="fa-solid fa-sun"></i></div><h3 data-i18n="tip4_title">الحماية من الشمس</h3><p data-i18n="tip4_desc">واقي الشمس هو أهم خطوة في روتين العناية. استخدمي SPF 50+ يومياً حتى في الأيام الغائمة.</p></div>
+</div>
+</section>
+</main>
+<footer class="site-footer container" id="contact">
+<div class="footer-grid reveal">
+<div class="footer-brand-section">
+<span class="brand-name" style="font-family:var(--font-display)">LUXE</span>
+<p data-i18n="footer_desc">مستحضرات تجميل فاخرة للمرأة العربية. نقدم لكِ أرقى المنتجات لعناية متكاملة ببشرتك وجمالك.</p>
+<div class="footer-social">
+<a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+<a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+<a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+<a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+</div>
+</div>
+<div class="footer-col"><h4 data-i18n="footer_links">روابط سريعة</h4><ul><li><a href="#hero" data-i18n="nav_home">الرئيسية</a></li><li><a href="#products" data-i18n="nav_products">المنتجات</a></li><li><a href="#about" data-i18n="nav_about">عن العلامة</a></li><li><a href="#tips" data-i18n="nav_tips">نصائح</a></li></ul></div>
+<div class="footer-col"><h4 data-i18n="footer_legal">قانوني</h4><ul><li><a href="#">سياسة الخصوصية</a></li><li><a href="#">شروط الاستخدام</a></li><li><a href="#">سياسة الإرجاع</a></li><li><a href="#">الشحن والتوصيل</a></li></ul></div>
+<div class="footer-col"><h4 data-i18n="footer_contact_title">تواصل معنا</h4>
+<div class="footer-contact-item"><i class="fa-solid fa-phone"></i><span>+20 123 456 7890</span></div>
+<div class="footer-contact-item"><i class="fa-brands fa-whatsapp"></i><span>+20 123 456 7890</span></div>
+<div class="footer-contact-item"><i class="fa-solid fa-envelope"></i><span>info@luxe-cosmetics.com</span></div>
+<div class="footer-contact-item"><i class="fa-solid fa-location-dot"></i><span data-i18n="footer_address">القاهرة، مصر</span></div>
+</div>
+</div>
+<div class="footer-bottom">
+<p class="footer-copy">&copy; 2025 LUXE Cosmetics. <span data-i18n="footer_rights">جميع الحقوق محفوظة.</span></p>
+<div class="footer-payments"><span data-i18n="footer_payment_methods">طرق الدفع:</span><div class="payment-icon">VISA</div><div class="payment-icon">MC</div><div class="payment-icon">COD</div><div class="payment-icon">Fawry</div></div>
+</div>
+</footer>
+<!-- WHATSAPP -->
+<div class="whatsapp-float" id="whatsappFloat">
+<div class="wa-options" id="waOptions">
+<div class="wa-options-title" data-i18n="wa_title">كيف نقدر نساعدك؟</div>
+<a href="https://wa.me/201234567890?text=%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%B7%D9%84%D8%A8%20%D9%85%D9%86%D8%AA%D8%AC" class="wa-option" target="_blank" rel="noopener"><i class="fa-solid fa-bag-shopping"></i><span data-i18n="wa_order">طلب منتج</span></a>
+<a href="https://wa.me/201234567890?text=%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D9%85%D9%86%D8%AA%D8%AC%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B9%D9%8A%D8%A7%D8%AF%D8%A7%D8%AA" class="wa-option" target="_blank" rel="noopener"><i class="fa-solid fa-user-doctor"></i><span data-i18n="wa_clinic">استفسار للعيادات</span></a>
+<a href="https://wa.me/201234567890?text=%D8%AD%D8%A8%D8%B2%20%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A9" class="wa-option" target="_blank" rel="noopener"><i class="fa-solid fa-calendar-check"></i><span data-i18n="wa_consult">حجز استشارة</span></a>
+<a href="tel:+201234567890" class="wa-option"><i class="fa-solid fa-phone"></i><span data-i18n="wa_call">اتصال مباشر</span></a>
+<a href="mailto:info@luxe-cosmetics.com" class="wa-option"><i class="fa-solid fa-envelope"></i><span data-i18n="wa_email">بريد إلكتروني</span></a>
+</div>
+<div class="whatsapp-main" id="whatsappMain" role="button" tabindex="0" aria-label="WhatsApp">
+<i class="fa-brands fa-whatsapp"></i>
+<span class="wa-tooltip" id="waTooltip">تحدثي معنا</span>
+</div>
+</div>
+<!-- PRODUCT MODAL -->
+<div class="modal-overlay" id="productModal">
+<div class="modal glass-card">
+<button class="modal-close" id="modalClose" type="button" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+<div class="modal-content">
+<div class="modal-gallery">
+<img id="modalMainImage" src="" alt="" />
+<div class="modal-thumbnails" id="modalThumbnails"></div>
+</div>
+<div class="modal-details">
+<div class="product-category-label" id="modalCategory"></div>
+<div class="product-name" id="modalName"></div>
+<div class="product-rating" id="modalRating"></div>
+<div class="product-desc" id="modalDesc"></div>
+<div class="product-tags" id="modalTags"></div>
+<div class="modal-section-title"><i class="fa-solid fa-flask"></i> <span data-i18n="modal_ingredients">المكونات</span></div>
+<div class="modal-ingredients" id="modalIngredients"></div>
+<div class="modal-section-title"><i class="fa-solid fa-book-open"></i> <span data-i18n="modal_usage">طريقة الاستخدام</span></div>
+<div class="modal-usage" id="modalUsage"></div>
+<div class="product-price" id="modalPrice" style="font-size:1.5rem;margin-top:.5rem"></div>
+<div class="modal-qty"><span data-i18n="qty_label">الكمية:</span><div class="qty-control"><button class="qty-btn" id="qtyMinus" type="button">-</button><span class="qty-value" id="qtyValue">1</span><button class="qty-btn" id="qtyPlus" type="button">+</button></div></div>
+<div class="modal-actions">
+<button class="btn-primary" id="modalAddCart" type="button"><i class="fa-solid fa-bag-shopping"></i> <span data-i18n="modal_add_cart">أضف إلى السلة</span></button>
+<a href="#" class="btn-whatsapp" id="modalWhatsapp" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="modal_order_wa">اطلب عبر واتساب</span></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- CART -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-sidebar" id="cartSidebar">
+<div class="cart-header"><h3><i class="fa-solid fa-bag-shopping"></i> <span data-i18n="cart_title">سلة التسوق</span></h3><button class="cart-close" id="cartClose" type="button" aria-label="Close cart"><i class="fa-solid fa-xmark"></i></button></div>
+<div class="cart-items" id="cartItems"></div>
+<div class="cart-footer" id="cartFooter" style="display:none"><div class="cart-total"><span class="cart-total-label" data-i18n="cart_total">الإجمالي</span><span class="cart-total-value" id="cartTotalValue">0 ج.م</span></div><button class="cart-checkout" id="cartCheckout" type="button" data-i18n="cart_checkout">إتمام الطلب</button></div>
+</div>
+<div class="toast-container" id="toastContainer" aria-live="polite"></div>
+<script>
+var products=[
+{id:1,nameEn:'Radiant Glow Serum',nameAr:'سيروم التوهج المشع',descEn:'Vitamin C + Hyaluronic Acid for radiant, glowing skin. 30ml.',descAr:'فيتامين سي + حمض الهيالورونيك لبشرة مشرقة ومشعّة. زجاجة ٣٠ مل.',price:1890,category:'skincare',images:['https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&h=600&fit=crop','https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=600&h=600&fit=crop'],icon:'fa-droplet',badge:'badge-best',badgeEn:'Best Seller',badgeAr:'الأكثر مبيعاً',catLabelEn:'Skincare',catLabelAr:'العناية بالبشرة',ingEn:'Vitamin C (15%), Hyaluronic Acid, Vitamin E, Niacinamide',ingAr:'فيتامين سي (١٥٪)، حمض الهيالورونيك، فيتامين إي، نياسيناميد',useEn:'Apply 2-3 drops to clean face morning and evening.',useAr:'ضعي ٢-٣ قطرات على بشرة نظيفة صباحاً ومساءً.',rating:4.8,reviews:124,forClinics:false},
+{id:2,nameEn:'Velvet Matte Lipstick',nameAr:'أحمر شفاه مات مخملي',descEn:'Long-wear velvet matte formula. Shade: Rose Dusk. 3.5g.',descAr:'تركيبة مخملي مات طويلة الثبات. درجة: غسق الورد. ٣.٥ جرام.',price:750,category:'makeup',images:['https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=600&h=600&fit=crop','https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&h=600&fit=crop'],icon:'fa-heart',badge:'badge-best',badgeEn:'Best Seller',badgeAr:'الأكثر مبيعاً',catLabelEn:'Makeup',catLabelAr:'المكياج',ingEn:'Jojoba Oil, Vitamin E, Shea Butter, Natural Pigments',ingAr:'زيت الجوجوبا، فيتامين إي، زبدة الشيا، أصباغ طبيعية',useEn:'Apply directly to lips or use a lip brush for precision.',useAr:'ضعي مباشرة على الشفتين أو استخدمي فرشاة للدقة.',rating:4.7,reviews:89,forClinics:false},
+{id:3,nameEn:'Golden Hour Highlighter',nameAr:'هايلايتر الساعة الذهبية',descEn:'Champagne shimmer highlighter for a luminous glow. 12g.',descAr:'هايلايتر بلمعان شمباني لتوهج ساطع. ١٢ جرام.',price:1350,category:'makeup',images:['https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=600&h=600&fit=crop','https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&h=600&fit=crop'],icon:'fa-sun',badge:'badge-new',badgeEn:'New',badgeAr:'جديد',catLabelEn:'Makeup',catLabelAr:'المكياج',ingEn:'Mica, Synthetic Fluorphlogopite, Dimethicone',ingAr:'يكا، سينتيتيك فلوروفلوجوبايت، ديميثيكون',useEn:'Apply to cheekbones and brow bone with a fan brush.',useAr:'ضعي على عظام الوجنتين وعظمة الحاجب بفرشاة مروحة.',rating:4.6,reviews:67,forClinics:false},
+{id:4,nameEn:'Silk Foundation',nameAr:'أساس الحرير',descEn:'Lightweight buildable coverage with silk finish. 30ml. SPF 30.',descAr:'تغطية خفيفة قابلة للبناء بلمعان حريري. ٣٠ مل. SPF ٣٠.',price:1650,category:'makeup',images:['https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?w=600&h=600&fit=crop','https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=600&h=600&fit=crop'],icon:'fa-bottle-droplet',badge:'badge-luxury',badgeEn:'Luxury',badgeAr:'فاخر',catLabelEn:'Makeup',catLabelAr:'المكياج',ingEn:'Hyaluronic Acid, Silk Proteins, SPF 30, Vitamin E',ingAr:'حمض الهيالورونيك، بروتينات الحرير، حماية SPF ٣٠، فيتامين إي',useEn:'Apply with sponge or brush starting from center of face.',useAr:'ضعي بالإسفنجة أو الفرشاة بدءاً من وسط الوجه.',rating:4.9,reviews:156,forClinics:false},
+{id:5,nameEn:'Deep Hydration Cream',nameAr:'كريم ترطيب عميق',descEn:'Ceramides + Squalane for deep, lasting moisture. 50ml.',descAr:'سيراميد + سكوالين لترطيب عميق ودائم. ٥٠ مل.',price:1200,category:'skincare',images:['https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?w=600&h=600&fit=crop','https://images.unsplash.com/photo-1570194065650-d99fb4b38b17?w=600&h=600&fit=crop'],icon:'fa-jar',badge:'badge-organic',badgeEn:'Hydrating',badgeAr:'مرطّب',catLabelEn:'Skincare',catLabelAr:'العناية بالبشرة',ingEn:'Ceramide NP, Squalane, Shea Butter, Centella Asiatica',ingAr:'سيراميد إن بي، سكوالين، زبدة الشيا، سنتيلا أسياتيكا',useEn:'Apply generously to clean face and neck morning and evening.',useAr:'ضعي كمية سخية على الوجه والرقبة النظيفين صباحاً ومساءً.',rating:4.8,reviews:203,forClinics:false},
+{id:6,nameEn:'Rose Petal Mist',nameAr:'ميست بتلات الورد',descEn:'Rose water + Niacinamide hydrating facial mist. 120ml.',descAr:'ماء الورد + نياسيناميد رذاذ مرطب للوجه. ١٢٠ مل.',price:680,category:'skincare',images:['https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=600&h=600&fit=crop','https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&h=600&fit=crop'],icon:'fa-spray-can-sparkles',badge:'badge-organic',badgeEn:'Organic',badgeAr:'عضوي',catLabelEn:'Skincare',catLabelAr:'العناية بالبشرة',ingEn:'Rose Water, Niacinamide, Glycerin, Aloe Vera',ingAr:'ماء الورد، نياسيناميد، جلسرين، ألوة فيرا',useEn:'Spray onto face after cleansing or throughout the day.',useAr:'رشي على الوجه بعد التنظيف أو على مدار اليوم.',rating:4.5,reviews:91,forClinics:false},
+{id:7,nameEn:'Midnight Eye Cream',nameAr:'كريم العين منتصف الليل',descEn:'Retinol + Peptides for anti-aging eye care. 15ml.',descAr:'ريتينول + ببتيدات لعناية مضادة للشيخوخة بالعينين. ١٥ مل.',price:2100,category:'skincare',images:['https://images.unsplash.com/photo-1570194065650-d99fb4b38b17?w=600&h=600&fit=crop','https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?w=600&h=600&fit=crop'],icon:'fa-eye',badge:'badge-luxury',badgeEn:'Luxury',badgeAr:'فاخر',catLabelEn:'Skincare',catLabelAr:'العناية بالبشرة',ingEn:'Retinol, Peptides, Caffeine, Vitamin K, Hyaluronic Acid',ingAr:'ريتينول، ببتيدات، كافيين، فيتامين ك، حمض الهيالورونيك',useEn:'Apply a small amount around the eye area gently. Use nightly.',useAr:'ضعي كمية صغيرة حول منطقة العين بلطف. استخدميه كل ليلة.',rating:4.7,reviews:78,forClinics:false},
+{id:8,nameEn:'Blush Bouquet',nameAr:'بلاشر باقة الورد',descEn:'Silky powder blush. Shade: Peach Bloom. 8g.',descAr:'بلاشر بودرة حريرية. درجة: تفتح الخوخ. ٨ جرام.',price:890,category:'makeup',images:['https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&h=600&fit=crop','https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=600&h=600&fit=crop'],icon:'fa-palette',badge:'badge-new',badgeEn:'New',badgeAr:'جديد',catLabelEn:'Makeup',catLabelAr:'المكياج',ingEn:'Talc, Mica, Jojoba Seed Oil, Vitamin E',ingAr:'تالك، ميكا، زبدة بذور الجوجوبا، فيتامين إي',useEn:'Apply to apples of cheeks with a fluffy brush.',useAr:'ضعي على تفاحة الخدين بفرشاة ناعمة.',rating:4.6,reviews:54,forClinics:false},
+{id:9,nameEn:'Lash Crown Mascara',nameAr:'ماسكارا تاج الرموش',descEn:'Volume + Length waterproof. Intense black. 10ml.',descAr:'حجم + طول مقاوم للماء. أسود كثيف. ١٠ مل.',price:720,category:'makeup',images:['https://images.unsplash.com/photo-1631213424028-ef2935b0d4cc?w=600&h=600&fit=crop','https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=600&h=600&fit=crop'],icon:'fa-wand-magic-sparkles',badge:'badge-best',badgeEn:'Best Seller',badgeAr:'الأكثر مبيعاً',catLabelEn:'Makeup',catLabelAr:'المكياج',ingEn:'Beeswax, Carnauba Wax, Iron Oxides, Panthenol',ingAr:'شمع النحل، شمع الكارنوبا، أكسيد الحديد، بانثينول',useEn:'Apply from root to tip in zigzag motion.',useAr:'ضعي من الجذر للطرف بحركة متعرجة.',rating:4.7,reviews:112,forClinics:false},
+{id:10,nameEn:'Luxe Perfume Oil',nameAr:'زيت عطر لوكس',descEn:'Oud + Rose absolute premium perfume oil. 12ml roller.',descAr:'عود + مطلق الورد زيت عطر فاخر. ١٢ مل بكرة.',price:2950,category:'perfume',images:['https://images.unsplash.com/photo-1541643600914-78b084683601?w=600&h=600&fit=crop','https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=600&h=600&fit=crop'],icon:'fa-gem',badge:'badge-luxury',badgeEn:'Luxury',badgeAr:'فاخر',catLabelEn:'Oils & Perfumes',catLabelAr:'العطور والزيوت',ingEn:'Oud Oil, Rose Absolute, Sandalwood, Amber, Musk',ingAr:'زيت العود، مطلق الورد، خشب الصندل، العنبر، المسك',useEn:'Apply to pulse points: wrists, behind ears, and neck.',useAr:'ضعي على نقاط النبض: المعصمين، خلف الأذنين، والرقبة.',rating:4.9,reviews:87,forClinics:false},
+{id:11,nameEn:'Clinical Peeling Solution',nameAr:'محلول التقشير السريري',descEn:'Professional grade AHA/BHA peeling for clinics. 30ml.',descAr:'محلول تقشير احترافي AHA/BHA للعيادات. ٣٠ مل.',price:4500,category:'clinic',images:['https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=600&fit=crop','https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&h=600&fit=crop'],icon:'fa-flask',badge:'badge-clinic',badgeEn:'Professional',badgeAr:'احترافي',catLabelEn:'Professional - Clinic Use',catLabelAr:'احترافي - العيادات',ingEn:'Glycolic Acid (30%), Lactic Acid (10%), Salicylic Acid (2%)',ingAr:'حمض الجليكوليك (٣٠٪)، حمض اللبن (١٠٪)، حمض الساليسيليك (٢٪)',useEn:'FOR PROFESSIONAL USE ONLY. Apply by trained specialist.',useAr:'للاستخدام الاحترافي فقط. يُطبّق بواسطة متخصص مدرب.',rating:4.9,reviews:56,forClinics:true},
+{id:12,nameEn:'Meso Glow Cocktail',nameAr:'كوكטייל الميزو للتوهج',descEn:'Professional mesotherapy cocktail. 10x5ml vials.',descAr:'كوكtail ميزوثيرابي احترافي. ١٠ زجاجات ٥ مل.',price:8500,category:'clinic',images:['https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&h=600&fit=crop','https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=600&fit=crop'],icon:'fa-syringe',badge:'badge-clinic',badgeEn:'Professional',badgeAr:'احترافي',catLabelEn:'Professional - Clinic Use',catLabelAr:'احترافي - العيادات',ingEn:'Hyaluronic Acid, Vitamin C, Amino Acids, Peptides',ingAr:'حمض الهيالورونيك، فيتامين سي، أمينو أسيدز، ببتيدات',useEn:'FOR PROFESSIONAL USE ONLY. Administer via mesotherapy.',useAr:'للاستخدام الاحترافي فقط. يُعطى عبر تقنية الميزوثيرابي.',rating:4.8,reviews:34,forClinics:true},
+{id:13,nameEn:'Keratin Hair Mask',nameAr:'قناع الكيراتين للشعر',descEn:'Deep repair keratin mask for damaged hair. 250ml.',descAr:'قناع كيراتين لإصلاح الشعر التالف. ٢٥٠ مل.',price:950,category:'hair',images:['https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&h=600&fit=crop','https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=600&h=600&fit=crop'],icon:'fa-mask',badge:'badge-organic',badgeEn:'Hydrating',badgeAr:'مرطّب',catLabelEn:'Hair Care',catLabelAr:'العناية بالشعر',ingEn:'Keratin, Argan Oil, Coconut Oil, Biotin',ingAr:'كيراتين، زيت الأرغان، زيت جوز الهند، بيوتين',useEn:'Apply to damp hair after shampooing. Leave 5-10 min.',useAr:'ضعي على الشعر الرطب بعد الشامبو. اتركيه ٥-١٠ دقائق.',rating:4.6,reviews:73,forClinics:false},
+{id:14,nameEn:'Luxury Oud Perfume',nameAr:'عطر العود الفاخر',descEn:'Concentrated oud perfume oil. 15ml.',descAr:'زيت عطر عود مركز. ١٥ مل.',price:3200,category:'perfume',images:['https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=600&h=600&fit=crop','https://images.unsplash.com/photo-1541643600914-78b084683601?w=600&h=600&fit=crop'],icon:'fa-bottle-perfume',badge:'badge-luxury',badgeEn:'Luxury',badgeAr:'فاخر',catLabelEn:'Oils & Perfumes',catLabelAr:'العطور والزيوت',ingEn:'Pure Oud Oil, Rose, Saffron, Musk, Amber',ingAr:'زيت عود نقي، وورد، زعفران، مسك، عنبر',useEn:'Apply a small amount to pulse points.',useAr:'ضعي كمية صغيرة على نقاط النبض.',rating:4.9,reviews:45,forClinics:false},
+{id:15,nameEn:'HA Dermal Filler',nameAr:'فيلر حمض الهيالورونيك',descEn:'Cross-linked HA filler. 1x1ml syringe.',descAr:'فيلر حمض الهيالورونيك. ١ مل.',price:12000,category:'clinic',images:['https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=600&fit=crop','https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&h=600&fit=crop'],icon:'fa-syringe',badge:'badge-clinic',badgeEn:'Professional',badgeAr:'احترافي',catLabelEn:'Professional - Clinic Use',catLabelAr:'احترافي - العيادات',ingEn:'Cross-linked Hyaluronic Acid (20mg/ml), Lidocaine',ingAr:'حمض الهيالورونيك المؤ cross-linked (٢٠ ملغ/مل)، ليدينوكين',useEn:'FOR PROFESSIONAL USE ONLY. Inject by licensed doctor.',useAr:'للاستخدام الاحترافي فقط. يُحقن بواسطة طبيب مرخص.',rating:5.0,reviews:28,forClinics:true},
+{id:16,nameEn:'Vitamin C Brightening Cream',nameAr:'كريم تفتيح فيتامين سي',descEn:'Brightening cream with 20% Vitamin C. 50ml.',descAr:'كريم تفتيح بتركيز ٢٠٪ فيتامين سي. ٥٠ مل.',price:1450,category:'skincare',images:['https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&h=600&fit=crop','https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?w=600&h=600&fit=crop'],icon:'fa-sun',badge:'badge-best',badgeEn:'Best Seller',badgeAr:'الأكثر مبيعاً',catLabelEn:'Skincare',catLabelAr:'العناية بالبشرة',ingEn:'Vitamin C (20%), Niacinamide, Arbutin, Licorice Extract',ingAr:'فيتامين سي (٢٠٪)، نياسيناميد، أربوتين، عرق السوس',useEn:'Apply a thin layer in the morning. Follow with SPF 50+.',useAr:'ضعي طبقة رقيقة صباحاً. تبعي بواقي شمس SPF ٥٠+.',rating:4.7,reviews:167,forClinics:false}
+];
+var i18n={ar:{nav_home:'الرئيسية',nav_products:'المنتجات',nav_about:'عن العلامة',nav_tips:'نصائح',nav_contact:'تواصل معنا',hero_badge:'مجموعة جمال فاخرة',hero_desc:'استمتعي بمجموعتنا المختارة من مستحضرات التجميل الفاخرة، مصنوعة من أجود المكونات لأناقة خالدة وعناية متكاملة ببشرتك.',hero_cta:'تسوقي الآن',hero_cta2:'اكتشفي المزيد',section_title:'مجموعتنا',section_desc:'منتجات مختارة بعناية لطقوس جمالك اليومية',filter_all:'الكل',filter_skincare:'العناية بالبشرة',filter_makeup:'المكياج',filter_hair:'الشعر',filter_perfume:'العطور والزيوت',filter_clinic:'للعيادات ★',features_title:'لماذا LUXE؟',features_desc:'نقدم لكِ أفضل المنتجات بأعلى معايير الجودة',feat1_title:'مكونات فاخرة',feat1_desc:'مصنوعة من أجود المكونات الطبيعية والعلمية المختبرة لضمان أفضل النتائج لبشرتك.',feat2_title:'جودة مضمونة',feat2_desc:'منتجات معتمدة من أطباء الجلدية والتجميل، آمنة وفعالة لجميع أنواع البشرة.',feat3_title:'توصيل سريع',feat3_desc:'توصيل لباب البيت في جميع أنحاء مصر. تغليف فاخر يحافظ على سلامة المنتج.',feat4_title:'استشارات متخصصة',feat4_desc:'فريق من الخبراء جاهز لمساعدتك في اختيار المنتجات المناسبة لنوع بشرتك.',testimonials_title:'تجارب عملائنا',testimonials_desc:'ماذا تقول النساء اللواتي جربن منتجاتنا',test1_text:'سيروم التوهج غيّر بشرتي تماماً! بعد أسبوعين فقط أصبحت بشرتي أكثر إشراقاً ونعومة.',test1_name:'سارة أحمد',test1_role:'من القاهرة',test2_text:'كريم الترطيب العميق أنقذ بشرتي الجافة هذا الشتاء. المكونات رائعة والملمس خفيف.',test2_name:'نورهان محمود',test2_role:'طبيبة جلدية',test3_text:'أحمر الشفاه المخملي ثبات رائع ولون طبيعي. أحب التشكيلة الفاخرة من LUXE.',test3_name:'مريم حسن',test3_role:'خبيرة تجميل',tips_title:'نصائح العناية بالبشرة',tips_desc:'إرشادات مخصصة للعناية ببشرتك حسب نوعها',tip1_title:'البشرة الجافة',tip1_desc:'استخدمي كريم ترطيب عميق يحتوي على سيراميد وسكوالين. رطبي بشرتك مرتين يومياً.',tip2_title:'البشرة الدهنية',tip2_desc:'اختاري سيروم خفيف بتركيبة غير قابلة للسد. استخدمي منظف لطيف وواقي شمس خالٍ من الزيوت.',tip3_title:'البشرة الحساسة',tip3_desc:'تجنبي المنتجات العطرية والكحول. اختاري مكونات طبيعية مثل ألوة فيرا ولافندر.',tip4_title:'الحماية من الشمس',tip4_desc:'واقي الشمس هو أهم خطوة في روتين العناية. استخدمي SPF 50+ يومياً.',footer_desc:'مستحضرات تجميل فاخرة للمرأة العربية. نقدم لكِ أرقى المنتجات لعناية متكاملة ببشرتك وجمالك.',footer_links:'روابط سريعة',footer_legal:'قانوني',footer_contact_title:'تواصل معنا',footer_address:'القاهرة، مصر',footer_rights:'جميع الحقوق محفوظة.',footer_payment_methods:'طرق الدفع:',modal_ingredients:'المكونات',modal_usage:'طريقة الاستخدام',modal_add_cart:'أضف إلى السلة',modal_order_wa:'اطلب عبر واتساب',cart_title:'سلة التسوق',cart_total:'الإجمالي',cart_checkout:'إتمام الطلب',cart_empty:'سلتك فارغة',cart_empty_desc:'أضيفي منتجات لتبدأي التسوق',wa_title:'كيف نقدر نساعدك؟',wa_order:'طلب منتج',wa_clinic:'استفسار للعيادات',wa_consult:'حجز استشارة',wa_call:'اتصال مباشر',wa_email:'بريد إلكتروني',wa_tooltip:'تحدثي معنا',toast_added:'تمت الإضافة للسلة',brand_sub:'كوسميتكس فاخرة',qty_label:'الكمية:'},en:{nav_home:'Home',nav_products:'Products',nav_about:'About',nav_tips:'Tips',nav_contact:'Contact',hero_badge:'Luxury Beauty Collection',hero_desc:'Indulge in our curated collection of premium cosmetics, crafted with the finest ingredients for timeless elegance.',hero_cta:'Shop Now',hero_cta2:'Learn More',section_title:'Our Collection',section_desc:'Handpicked essentials for your daily beauty ritual',filter_all:'All',filter_skincare:'Skincare',filter_makeup:'Makeup',filter_hair:'Hair Care',filter_perfume:'Oils & Perfumes',filter_clinic:'For Clinics ★',features_title:'Why LUXE?',features_desc:'We bring you the finest products with the highest quality standards',feat1_title:'Premium Ingredients',feat1_desc:'Made with the finest natural and scientifically tested ingredients for the best results.',feat2_title:'Guaranteed Quality',feat2_desc:'Products approved by dermatologists, safe and effective for all skin types.',feat3_title:'Fast Delivery',feat3_desc:'Home delivery across Egypt. Luxury packaging that preserves product integrity.',feat4_title:'Expert Consultations',feat4_desc:'A team of experts ready to help you choose the right products for your skin.',testimonials_title:"Our Clients' Stories",testimonials_desc:'What women who tried our products are saying',test1_text:'The Radiant Serum completely transformed my skin! After just two weeks, my skin is more glowing and smooth.',test1_name:'Sara Ahmed',test1_role:'From Cairo',test2_text:'The Deep Hydration Cream saved my dry skin this winter. The ingredients are wonderful and the texture is light.',test2_name:'Nourhan Mahmoud',test2_role:'Dermatologist',test3_text:'The Velvet Matte Lipstick has amazing staying power and a natural color. I love LUXE.',test3_name:'Mariam Hassan',test3_role:'Beauty Expert',tips_title:'Skincare Tips',tips_desc:'Customized guidance for your skin based on its type',tip1_title:'Dry Skin',tip1_desc:'Use a deep moisturizing cream with ceramides and squalane. Moisturize twice daily.',tip2_title:'Oily Skin',tip2_desc:'Choose a lightweight non-comedogenic serum. Use a gentle cleanser and oil-free sunscreen.',tip3_title:'Sensitive Skin',tip3_desc:'Avoid fragranced products. Choose natural ingredients like aloe vera and lavender.',tip4_title:'Sun Protection',tip4_desc:'Sunscreen is the most important step. Use SPF 50+ daily, even on cloudy days.',footer_desc:'Premium cosmetics for the modern woman. The finest products for complete skin care.',footer_links:'Quick Links',footer_legal:'Legal',footer_contact_title:'Contact Us',footer_address:'Cairo, Egypt',footer_rights:'All rights reserved.',footer_payment_methods:'Payment:',modal_ingredients:'Ingredients',modal_usage:'How to Use',modal_add_cart:'Add to Cart',modal_order_wa:'Order via WhatsApp',cart_title:'Shopping Cart',cart_total:'Total',cart_checkout:'Checkout',cart_empty:'Your cart is empty',cart_empty_desc:'Add products to start shopping',wa_title:'How can we help?',wa_order:'Order a product',wa_clinic:'Clinic inquiry',wa_consult:'Book consultation',wa_call:'Direct call',wa_email:'Email us',wa_tooltip:'Chat with us',toast_added:'Added to cart',brand_sub:'Premium Cosmetics',qty_label:'Quantity:'}};var currentLang=localStorage.getItem('luxe-lang')||'ar';
+var cart=JSON.parse(localStorage.getItem('luxe-cart')||'[]');
+var currentFilter='all';var currentSearch='';var modalProduct=null;var modalQty=1;var waOpen=false;
+function formatPrice(n,l){if(l==='ar'){var d=['0','1','2','3','4','5','6','7','8','9'];var a=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];return String(n).replace(/\d/g,function(c){return a[parseInt(c)]})}return n.toLocaleString('en-US')}
+function getCurrency(l){return l==='ar'?'ج.م':'EGP'}
+function t(k){return i18n[currentLang][k]||k}
+function getStars(r){var s='';var full=Math.floor(r);var half=r%1>=0.3;for(var i=0;i<full;i++)s+='<i class="fa-solid fa-star"></i>';if(half)s+='<i class="fa-solid fa-star-half-stroke"></i>';var empty=5-full-(half?1:0);for(var i=0;i<empty;i++)s+='<i class="fa-regular fa-star"></i>';return s}
+function renderProducts(){var grid=document.getElementById('productsGrid');grid.innerHTML='';var filtered=products.filter(function(p){if(currentFilter!=='all'&&p.category!==currentFilter)return false;if(currentSearch){var q=currentSearch.toLowerCase();var name=(currentLang==='ar'?p.nameAr:p.nameEn).toLowerCase();var desc=(currentLang==='ar'?p.descAr:p.descEn).toLowerCase();if(name.indexOf(q)===-1&&desc.indexOf(q)===-1)return false}return true});if(filtered.length===0){grid.innerHTML='<div class="no-results"><i class="fa-solid fa-magnifying-glass"></i><p>'+(currentLang==='ar'?'لم يتم العثور على منتجات':'No products found')+'</p></div>';return}filtered.forEach(function(p,i){var name=currentLang==='ar'?p.nameAr:p.nameEn;var desc=currentLang==='ar'?p.descAr:p.descEn;var price=formatPrice(p.price,currentLang);var curr=getCurrency(currentLang);var badge=currentLang==='ar'?p.badgeAr:p.badgeEn;var catLabel=currentLang==='ar'?p.catLabelAr:p.catLabelEn;var img=p.images&&p.images[0]?p.images[0]:'';var card=document.createElement('div');card.className='product-card glass-card';card.setAttribute('role','listitem');card.style.transitionDelay=(i*70)+'ms';var tagClass=p.category==='clinic'?'tag-clinic':'tag-personal';var imgHtml=img?"<img src=\""+img+"\" alt=\""+name+"\" loading=\"lazy\" onerror=\"this.style.display='none';this.nextElementSibling.style.display='flex'\" />":"";card.innerHTML="<div class=\"product-image\">"+imgHtml+"<div class=\"product-image-placeholder\" style=\"display:"+(img?"none":"flex")+"\"><i class=\"fa-solid "+p.icon+"\"></i></div><span class=\"product-badge "+p.badge+"\">"+badge+"</span></div><div class=\"product-info\"><div class=\"product-category-label\">"+catLabel+"</div><div class=\"product-name\">"+name+"</div><div class=\"product-desc\">"+desc+"</div><div class=\"product-rating\"><span class=\"stars\">"+getStars(p.rating)+"</span><span class=\"rating-text\">"+p.rating+" ("+p.reviews+")</span></div><div class=\"product-tags\"><span class=\"tag "+tagClass+"\">"+catLabel+"</span>"+(p.forClinics?"<span class=\"tag tag-clinic\">"+(currentLang==='ar'?'للعيادات':'Clinic Use')+"</span>":"")+"</div><div class=\"product-bottom\"><div class=\"product-price\">"+price+"<span class=\"currency\">"+curr+"</span></div><button class=\"btn-add-cart\" data-id=\""+p.id+"\" type=\"button\"><i class=\"fa-solid fa-plus\"></i> "+(currentLang==='ar'?'أضف':'Add')+"</button></div></div>";grid.appendChild(card)});setTimeout(function(){grid.querySelectorAll('.product-card').forEach(function(c){c.classList.add('shown')})},60);grid.querySelectorAll('.product-card').forEach(function(card){card.addEventListener('click',function(e){if(e.target.closest('.btn-add-cart'))return;var id=parseInt(card.querySelector('.btn-add-cart').getAttribute('data-id'));openModal(id)})});grid.querySelectorAll('.btn-add-cart').forEach(function(btn){btn.addEventListener('click',function(e){e.stopPropagation();var id=parseInt(btn.getAttribute('data-id'));addToCart(id)})})}function openModal(id){var p=products.find(function(pr){return pr.id===id});if(!p)return;modalProduct=p;modalQty=1;var lang=currentLang;var mainImg=document.getElementById('modalMainImage');if(p.images&&p.images[0]){mainImg.src=p.images[0];mainImg.style.display='block';mainImg.onerror=function(){this.style.display='none'}}else{mainImg.style.display='none'}mainImg.alt=lang==='ar'?p.nameAr:p.nameEn;document.getElementById('modalCategory').textContent=lang==='ar'?p.catLabelAr:p.catLabelEn;document.getElementById('modalName').textContent=lang==='ar'?p.nameAr:p.nameEn;document.getElementById('modalDesc').textContent=lang==='ar'?p.descAr:p.descEn;document.getElementById('modalIngredients').textContent=lang==='ar'?p.ingAr:p.ingEn;document.getElementById('modalUsage').textContent=lang==='ar'?p.useAr:p.useEn;document.getElementById('modalRating').innerHTML='<span class="stars">'+getStars(p.rating)+'</span><span class="rating-text">'+p.rating+' ('+p.reviews+' '+(lang==='ar'?'تقييم':'reviews')+')</span>';document.getElementById('modalPrice').innerHTML=formatPrice(p.price,lang)+'<span class="currency">'+getCurrency(lang)+'</span>';document.getElementById('qtyValue').textContent='1';var thumbs=document.getElementById('modalThumbnails');thumbs.innerHTML='';if(p.images&&p.images.length>1){p.images.forEach(function(src,i){var thumb=document.createElement('div');thumb.className='modal-thumb'+(i===0?' active':'');thumb.innerHTML='<img src="'+src+'" alt="thumb" />';thumb.addEventListener('click',function(){mainImg.src=src;thumbs.querySelectorAll('.modal-thumb').forEach(function(t){t.classList.remove('active')});thumb.classList.add('active')});thumbs.appendChild(thumb)})}var waMsg=encodeURIComponent(lang==='ar'?'أريد طلب '+p.nameAr:'I would like to order '+p.nameEn);document.getElementById('modalWhatsapp').href='https://wa.me/201234567890?text='+waMsg;document.getElementById('productModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('productModal').classList.remove('active');document.body.style.overflow='';modalProduct=null}
+function addToCart(id){var p=products.find(function(pr){return pr.id===id});if(!p)return;var existing=cart.find(function(c){return c.id===id});if(existing){existing.qty++}else{cart.push({id:p.id,nameEn:p.nameEn,nameAr:p.nameAr,price:p.price,image:p.images&&p.images[0]?p.images[0]:'',icon:p.icon,qty:1})}saveCart();updateCartUI();var name=currentLang==='ar'?p.nameAr:p.nameEn;showToast(name+' - '+t('toast_added'))}
+function removeFromCart(id){cart=cart.filter(function(c){return c.id!==id});saveCart();updateCartUI()}
+function changeQty(id,delta){var item=cart.find(function(c){return c.id===id});if(!item)return;item.qty+=delta;if(item.qty<=0){removeFromCart(id);return}saveCart();updateCartUI()}
+function saveCart(){localStorage.setItem('luxe-cart',JSON.stringify(cart))}
+function updateCartUI(){var count=cart.reduce(function(s,c){return s+c.qty},0);var countEl=document.getElementById('cartCount');countEl.textContent=count;countEl.classList.toggle('show',count>0);var itemsEl=document.getElementById('cartItems');var footerEl=document.getElementById('cartFooter');if(cart.length===0){itemsEl.innerHTML='<div class="cart-empty"><i class="fa-solid fa-bag-shopping"></i><p>'+t('cart_empty')+'</p><p style="font-size:.75rem;margin-top:.3rem">'+t('cart_empty_desc')+'</p></div>';footerEl.style.display='none';return}footerEl.style.display='block';var html='';cart.forEach(function(item){var name=currentLang==='ar'?item.nameAr:item.nameEn;var img=item.image?'<img src="'+item.image+'" alt="'+name+'" />':'<i class="fa-solid '+item.icon+'" style="font-size:1.5rem;color:var(--rose-gold-l)"></i>';html+='<div class="cart-item"><div class="cart-item-img">'+img+'</div><div class="cart-item-info"><div class="cart-item-name">'+name+'</div><div class="cart-item-price">'+formatPrice(item.price*item.qty,currentLang)+' '+getCurrency(currentLang)+'</div><div class="cart-item-qty"><button onclick="changeQty('+item.id+',-1)" type="button">-</button><span>'+item.qty+'</span><button onclick="changeQty('+item.id+',1)" type="button">+</button></div></div><button class="cart-item-remove" onclick="removeFromCart('+item.id+')" type="button"><i class="fa-solid fa-trash-can"></i></button></div>'});itemsEl.innerHTML=html;var total=cart.reduce(function(s,c){return s+c.price*c.qty},0);document.getElementById('cartTotalValue').textContent=formatPrice(total,currentLang)+' '+getCurrency(currentLang)}
+function openCart(){document.getElementById('cartSidebar').classList.add('active');document.getElementById('cartOverlay').classList.add('active');document.body.style.overflow='hidden'}
+function closeCart(){document.getElementById('cartSidebar').classList.remove('active');document.getElementById('cartOverlay').classList.remove('active');document.body.style.overflow=''}
+function showToast(message){var container=document.getElementById('toastContainer');var toast=document.createElement('div');toast.className='toast';toast.textContent=message;container.appendChild(toast);setTimeout(function(){toast.classList.add('out');toast.addEventListener('animationend',function(){toast.remove()})},2200)}
+function updateUI(lang){var els=document.querySelectorAll('[data-i18n]');els.forEach(function(el){var key=el.getAttribute('data-i18n');if(i18n[lang][key])el.textContent=i18n[lang][key]});document.getElementById('brandSub').textContent=t('brand_sub');document.getElementById('heroTitle').innerHTML=lang==='ar'?'اكتشفي <span class="accent">جمالك</span> المشع':'Discover Your <span class="accent">Radiant</span> Beauty';document.getElementById('heroDesc').textContent=t('hero_desc');document.getElementById('langLabel').textContent=lang==='ar'?'English':'العربية';document.getElementById('waTooltip').textContent=t('wa_tooltip');var phEls=document.querySelectorAll('[data-i18n-placeholder]');phEls.forEach(function(el){var key=el.getAttribute('data-i18n-placeholder');if(i18n[lang][key])el.placeholder=i18n[lang][key]})}
+function setLang(lang){currentLang=lang;localStorage.setItem('luxe-lang',lang);document.documentElement.setAttribute('lang',lang);document.documentElement.setAttribute('dir',lang==='ar'?'rtl':'ltr');updateUI(lang);renderProducts();updateCartUI()}
+function closeMobileNav(){document.getElementById('mobileNav').classList.remove('show')}document.addEventListener('DOMContentLoaded',function(){
+setLang(currentLang);
+var header=document.getElementById('siteHeader');
+var ticking=false;
+window.addEventListener('scroll',function(){if(!ticking){requestAnimationFrame(function(){header.classList.toggle('scrolled',window.scrollY>30);ticking=false});ticking=true}});
+var observer=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}})},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){observer.observe(el)});
+document.getElementById('langToggle').addEventListener('click',function(){setLang(currentLang==='en'?'ar':'en')});
+document.getElementById('cartBtn').addEventListener('click',openCart);
+document.getElementById('cartClose').addEventListener('click',closeCart);
+document.getElementById('cartOverlay').addEventListener('click',closeCart);
+document.getElementById('modalClose').addEventListener('click',closeModal);
+document.getElementById('productModal').addEventListener('click',function(e){if(e.target===this)closeModal()});
+document.getElementById('qtyMinus').addEventListener('click',function(){if(modalQty>1){modalQty--;document.getElementById('qtyValue').textContent=modalQty}});
+document.getElementById('qtyPlus').addEventListener('click',function(){modalQty++;document.getElementById('qtyValue').textContent=modalQty});
+document.getElementById('modalAddCart').addEventListener('click',function(){if(modalProduct){for(var i=0;i<modalQty;i++)addToCart(modalProduct.id);closeModal()}});
+document.getElementById('cartCheckout').addEventListener('click',function(){var msg=currentLang==='ar'?'مرحبًا، أريد إتمام الطلب:\n\n':'Hello, I would like to checkout:\n\n';cart.forEach(function(item){var name=currentLang==='ar'?item.nameAr:item.nameEn;msg+=name+' x'+item.qty+' - '+formatPrice(item.price*item.qty,currentLang)+' '+getCurrency(currentLang)+'\n'});var total=cart.reduce(function(s,c){return s+c.price*c.qty},0);msg+='\n'+t('cart_total')+': '+formatPrice(total,currentLang)+' '+getCurrency(currentLang);window.open('https://wa.me/201234567890?text='+encodeURIComponent(msg),'_blank')});
+document.getElementById('searchInput').addEventListener('input',function(e){currentSearch=e.target.value;renderProducts()});
+document.querySelectorAll('.filter-btn').forEach(function(btn){btn.addEventListener('click',function(){currentFilter=btn.getAttribute('data-filter');document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active')});btn.classList.add('active');renderProducts()})});
+document.getElementById('mobileMenuBtn').addEventListener('click',function(){document.getElementById('mobileNav').classList.add('show')});
+document.getElementById('mobileNavClose').addEventListener('click',closeMobileNav);
+document.getElementById('whatsappMain').addEventListener('click',function(e){e.stopPropagation();waOpen=!waOpen;document.getElementById('waOptions').classList.toggle('show',waOpen)});
+document.addEventListener('click',function(e){if(!document.getElementById('whatsappFloat').contains(e.target)){waOpen=false;document.getElementById('waOptions').classList.remove('show')}});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeModal();closeCart();document.getElementById('mobileNav').classList.remove('show');waOpen=false;document.getElementById('waOptions').classList.remove('show')}});
+updateCartUI();
+});
+</script>
 </body>
 </html>
