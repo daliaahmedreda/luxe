@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>سياسة الاسترجاع والاستبدال - LUXE</title>
+    <meta name="description" content="سياسة الاسترجاع والاستبدال الخاصة بمتجر LUXE — Return &amp; Exchange Policy." />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #c9a87c;
+            --gold-light: #e8d5b8;
+            --gold-dark: #a8875e;
+            --cream: #faf6f0;
+            --dark: #1e1a16;
+            --gray: #5a534c;
+            --light-gray: #f0ebe4;
+            --border-radius: 12px;
+            --shadow: 0 8px 30px rgba(30, 26, 22, 0.08);
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--cream);
+            color: var(--dark);
+            line-height: 1.8;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 3rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* ===== DECORATIVE GOLD LINE ===== */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-dark));
+        }
+
+        /* ===== BACK TO STORE ===== */
+        .back-store {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            color: var(--gold-dark);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .back-store:hover {
+            opacity: 0.7;
+        }
+
+        /* ===== HEADER ===== */
+        .policy-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            padding-top: 0.5rem;
+        }
+
+        .policy-header .subtitle {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--gold);
+            font-size: 1rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+        }
+
+        .policy-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 2.6rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .policy-header h1 .arabic {
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            font-size: 2.4rem;
+        }
+
+        .policy-header .divider {
+            width: 80px;
+            height: 3px;
+            background: var(--gold);
+            margin: 1rem auto;
+            border-radius: 4px;
+        }
+
+        .policy-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        /* ===== LANGUAGE TOGGLE ===== */
+        .lang-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .lang-toggle button {
+            background: transparent;
+            border: 2px solid var(--gold-light);
+            padding: 0.5rem 2rem;
+            border-radius: 50px;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--gray);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lang-toggle button:hover,
+        .lang-toggle button.active {
+            border-color: var(--gold);
+            background: var(--gold);
+            color: #fff;
+        }
+
+        /* ===== POLICY CONTENT ===== */
+        .policy-content {
+            display: block;
+        }
+
+        .policy-content.hidden {
+            display: none;
+        }
+
+        .policy-section {
+            margin-bottom: 2.2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .policy-section:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .policy-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .policy-section h2 .arabic {
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .policy-section h2 .icon {
+            font-size: 1.4rem;
+        }
+
+        .policy-section p,
+        .policy-section li {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+
+        .policy-section ul,
+        .policy-section ol {
+            padding-right: 1.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .policy-section li {
+            margin-bottom: 0.4rem;
+        }
+
+        .policy-section strong {
+            color: var(--dark);
+        }
+
+        /* ===== HIGHLIGHT BOX ===== */
+        .highlight-box {
+            background: var(--cream);
+            border-right: 4px solid var(--gold);
+            padding: 1.2rem 1.8rem;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            margin: 1.2rem 0;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+            color: var(--dark);
+        }
+
+        .highlight-box .gold-text {
+            color: var(--gold-dark);
+            font-weight: 600;
+        }
+
+        /* ===== CONTACT INFO ===== */
+        .contact-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem 3rem;
+            background: var(--cream);
+            padding: 1.5rem 2rem;
+            border-radius: var(--border-radius);
+            margin-top: 1.5rem;
+        }
+
+        .contact-row .item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1rem;
+        }
+
+        .contact-row .item .emoji {
+            font-size: 1.3rem;
+        }
+        .contact-row .item a {
+            color: var(--gold-dark);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .contact-row .item a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== FOOTER ===== */
+        .policy-footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--light-gray);
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .policy-footer .luxe-logo {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--gold-dark);
+            letter-spacing: 2px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1.2rem;
+            }
+            .policy-header h1 {
+                font-size: 2rem;
+            }
+            .policy-header h1 .arabic {
+                font-size: 1.8rem;
+            }
+            .policy-section h2 {
+                font-size: 1.25rem;
+            }
+            .contact-row {
+                flex-direction: column;
+                gap: 0.8rem;
+                padding: 1.2rem;
+            }
+            .lang-toggle button {
+                padding: 0.4rem 1.2rem;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .policy-header h1 {
+                font-size: 1.6rem;
+            }
+            .policy-header h1 .arabic {
+                font-size: 1.5rem;
+            }
+            .container {
+                padding: 1.5rem 0.8rem;
+            }
+        }
+    </style>
+
+    <!-- ===== LANGUAGE INIT (مزامنة لغة الموقع الرئيسي) ===== -->
+    <script>
+        (function() {
+            // اللغة تأتي من: معامل ?lang= ثم إعداد الموقع الرئيسي في localStorage
+            var params = new URLSearchParams(window.location.search);
+            var lang = params.get('lang');
+            if (lang !== 'ar' && lang !== 'en') {
+                lang = localStorage.getItem('luxe-lang');
+            }
+            if (lang !== 'ar' && lang !== 'en') lang = 'ar';
+            document.documentElement.lang = lang;
+            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+            // إخفاء المحتوى غير المطلوب فوراً (بدون وميض)
+            document.write('<style id="langInitStyle">#' + (lang === 'ar' ? 'policyEn' : 'policyAr') + '{display:none!important}</style>');
+            window.__luxeLang = lang;
+        })();
+    </script>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- ===== BACK TO STORE ===== -->
+        <a class="back-store" href="index.html" data-i18n-back="back_store">→ العودة إلى المتجر</a>
+
+        <!-- ===== HEADER ===== -->
+        <header class="policy-header">
+            <div class="subtitle">✦ LUXE ✦</div>
+            <h1>
+                <span class="arabic">سياسة الاسترجاع والاستبدال</span>
+                <br style="display: none;" />
+                <span style="font-size: 0.5em; display: block; line-height: 0.2;">&nbsp;</span>
+                <span style="font-size: 0.7em; font-weight: 400; color: var(--gray);">Return &amp; Exchange Policy</span>
+            </h1>
+            <div class="divider"></div>
+            <p data-i18n-p="header_desc">نحرص في <strong>LUXE</strong> على رضاكِ التام. إليكِ سياسة الاسترجاع والاستبدال الخاصة بنا.</p>
+        </header>
+
+        <!-- ===== LANGUAGE TOGGLE ===== -->
+        <div class="lang-toggle" id="langToggle">
+            <button data-lang="ar">🇸🇦 العربية</button>
+            <button data-lang="en">🇬🇧 English</button>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- ===== ARABIC CONTENT ===== -->
+        <!-- ========================================================= -->
+        <div class="policy-content" id="policyAr">
+
+            <!-- 1 -->
+            <section class="policy-section">
+                <h2><span class="icon">🕒</span> <span class="arabic">مدة الاسترجاع</span></h2>
+                <p>يحق لكِ استرجاع المنتجات خلال <strong>١٤ يومًا</strong> من تاريخ استلام الطلب، بشرط أن تكون المنتجات غير مستخدمة وفي عبوتها الأصلية السليمة.</p>
+                <div class="highlight-box">
+                    <p>📌 <span class="gold-text">ملاحظة:</span> المنتجات الاحترافية (المخصصة للعيادات) غير قابلة للاسترجاع لأسباب صحية وسلامة.</p>
+                </div>
+            </section>
+
+            <!-- 2 -->
+            <section class="policy-section">
+                <h2><span class="icon">✅</span> <span class="arabic">شروط الاسترجاع والاستبدال</span></h2>
+                <ul>
+                    <li><strong>المنتج غير مستخدم:</strong> يجب ألا يكون قد فُتح أو استُخدم أو تلف.</li>
+                    <li><strong>العبوة الأصلية:</strong> يجب إرجاع المنتج في عبوته الأصلية مع جميع الملحقات.</li>
+                    <li><strong>إرفاق الفاتورة:</strong> يُرجى إرفاق نسخة من فاتورة الشراء أو رقم الطلب.</li>
+                    <li><strong>حالات العيوب:</strong> إذا كان المنتج به عيب صناعي، نتحمل تكاليف الاسترجاع بالكامل.</li>
+                    <li><strong>المنتجات المخصصة:</strong> المنتجات التي تم تخصيصها حسب طلبكِ (نقوش، ألوان خاصة) غير قابلة للاسترجاع.</li>
+                </ul>
+            </section>
+
+            <!-- 3 -->
+            <section class="policy-section">
+                <h2><span class="icon">💰</span> <span class="arabic">آلية الاسترداد</span></h2>
+                <ol>
+                    <li>تواصلي مع فريق خدمة العملاء عبر الواتساب أو البريد الإلكتروني لإبلاغنا برغبتكِ في الاسترجاع.</li>
+                    <li>سيقوم فريقنا بتوجيهكِ لعملية الإرجاع وتحديد موعد استلام المنتج.</li>
+                    <li>بعد فحص المنتج والتأكد من استيفاء الشروط، سيتم استرداد المبلغ خلال <strong>٥-٧ أيام عمل</strong>.</li>
+                    <li>يتم الاسترداد بنفس طريقة الدفع التي استخدمتها (بطاقة ائتمان، فودافون كاش، تحويل بنكي).</li>
+                </ol>
+                <div class="highlight-box">
+                    <p>💳 <span class="gold-text">رسوم الشحن:</span> في حالة الاسترجاع لسبب غير عيب صناعي، تتحمل العميلة تكاليف الشحن. أما في حالة العيب، فنتكفل نحن بجميع التكاليف.</p>
+                </div>
+            </section>
+
+            <!-- 4 -->
+            <section class="policy-section">
+                <h2><span class="icon">🔄</span> <span class="arabic">الاستبدال</span></h2>
+                <p>إذا كنتِ ترغبين في استبدال المنتج بمنتج آخر (نفس السعر أو أعلى مع دفع الفرق)، يُمكنكِ ذلك خلال <strong>١٤ يومًا</strong> من الاستلام، مع مراعاة نفس الشروط المذكورة أعلاه.</p>
+                <p>في حالة الرغبة في استبدال المنتج بمنتج أقل سعرًا، يُعاد الفرق إليكِ كرصيد في محفظتكِ لدى LUXE يمكن استخدامه في أي طلب مستقبلي.</p>
+            </section>
+
+            <!-- 5 -->
+            <section class="policy-section">
+                <h2><span class="icon">🚫</span> <span class="arabic">المنتجات غير القابلة للاسترجاع</span></h2>
+                <ul>
+                    <li>🧴 المنتجات التي تم فتحها أو استخدامها (باستثناء عيوب التصنيع).</li>
+                    <li>💄 مستحضرات التجميل التي تتطلب تعقيمًا (ماسكارا، أحمر شفاه، أدوات العيون).</li>
+                    <li>🏥 المنتجات الاحترافية المخصصة للعيادات (التقشير السريري، الميزوثيرابي، الفيلر).</li>
+                    <li>🎁 المنتجات التي تم شراؤها في عروض خاصة أو تخفيضات نهائية.</li>
+                </ul>
+            </section>
+
+            <!-- 6 -->
+            <section class="policy-section">
+                <h2><span class="icon">📞</span> <span class="arabic">كيفية التواصل</span></h2>
+                <p>فريق خدمة العملاء لدينا متاح يوميًا من <strong>١٠ صباحًا إلى ١٠ مساءً</strong> (بتوقيت القاهرة).</p>
+                <div class="contact-row">
+                    <span class="item"><span class="emoji">📱</span> <a href="https://wa.me/201000791799" target="_blank">واتساب: +20 100 079 1799</a></span>
+                    <span class="item"><span class="emoji">📧</span> <a href="mailto:info@luxe-cosmetics.com">info@luxe-cosmetics.com</a></span>
+                    <span class="item"><span class="emoji">📞</span> <a href="tel:+201000791799">+20 100 079 1799</a></span>
+                </div>
+            </section>
+
+            <div class="policy-footer">
+                <span class="luxe-logo">✦ LUXE ✦</span>
+                <p style="margin-top: 0.5rem;">آخر تحديث: ١٨ أغسطس ٢٠٢٦</p>
+            </div>
+
+        </div>
+        <!-- ===== END ARABIC ===== -->
+
+        <!-- ========================================================= -->
+        <!-- ===== ENGLISH CONTENT ===== -->
+        <!-- ========================================================= -->
+        <div class="policy-content" id="policyEn">
+
+            <!-- 1 -->
+            <section class="policy-section">
+                <h2><span class="icon">🕒</span> Return Period</h2>
+                <p>You may return products within <strong>14 days</strong> from the date of order delivery, provided that the products are unused and in their original, undamaged packaging.</p>
+                <div class="highlight-box">
+                    <p>📌 <span class="gold-text">Note:</span> Professional-grade products (clinics &amp; aesthetic use) are non-returnable for health and safety reasons.</p>
+                </div>
+            </section>
+
+            <!-- 2 -->
+            <section class="policy-section">
+                <h2><span class="icon">✅</span> Return &amp; Exchange Conditions</h2>
+                <ul>
+                    <li><strong>Unused product:</strong> The item must not have been opened, used, or damaged.</li>
+                    <li><strong>Original packaging:</strong> Return the product in its original box with all accessories included.</li>
+                    <li><strong>Attach invoice:</strong> Please include a copy of the purchase invoice or order number.</li>
+                    <li><strong>Defective items:</strong> If the product has a manufacturing defect, we will cover all return shipping costs.</li>
+                    <li><strong>Customised products:</strong> Items personalised upon your request (engravings, custom shades) cannot be returned.</li>
+                </ul>
+            </section>
+
+            <!-- 3 -->
+            <section class="policy-section">
+                <h2><span class="icon">💰</span> Refund Process</h2>
+                <ol>
+                    <li>Contact our customer service team via WhatsApp or email to inform us of your return request.</li>
+                    <li>Our team will guide you through the return process and schedule a pick-up if needed.</li>
+                    <li>After inspecting the product and confirming it meets the conditions, your refund will be processed within <strong>5–7 business days</strong>.</li>
+                    <li>Refunds are issued using the same payment method you used (credit card, Vodafone Cash, bank transfer).</li>
+                </ol>
+                <div class="highlight-box">
+                    <p>💳 <span class="gold-text">Shipping fees:</span> For returns not due to a defect, the customer bears the shipping costs. For defective items, we cover all costs.</p>
+                </div>
+            </section>
+
+            <!-- 4 -->
+            <section class="policy-section">
+                <h2><span class="icon">🔄</span> Exchanges</h2>
+                <p>If you wish to exchange the product for another item (same price or higher with payment of the difference), you may do so within <strong>14 days</strong> of receipt, under the same conditions listed above.</p>
+                <p>If you prefer an exchange for a lower-priced product, the difference will be credited to your LUXE wallet for use on any future order.</p>
+            </section>
+
+            <!-- 5 -->
+            <section class="policy-section">
+                <h2><span class="icon">🚫</span> Non-Returnable Items</h2>
+                <ul>
+                    <li>🧴 Products that have been opened or used (except for manufacturing defects).</li>
+                    <li>💄 Cosmetics requiring sterilisation (mascara, lipsticks, eye tools).</li>
+                    <li>🏥 Professional products for clinics (clinical peels, mesotherapy, fillers).</li>
+                    <li>🎁 Items purchased during special offers or final clearance sales.</li>
+                </ul>
+            </section>
+
+            <!-- 6 -->
+            <section class="policy-section">
+                <h2><span class="icon">📞</span> How to Reach Us</h2>
+                <p>Our customer service team is available daily from <strong>10 AM to 10 PM</strong> (Cairo time).</p>
+                <div class="contact-row">
+                    <span class="item"><span class="emoji">📱</span> <a href="https://wa.me/201000791799" target="_blank">WhatsApp: +20 100 079 1799</a></span>
+                    <span class="item"><span class="emoji">📧</span> <a href="mailto:info@luxe-cosmetics.com">info@luxe-cosmetics.com</a></span>
+                    <span class="item"><span class="emoji">📞</span> <a href="tel:+201000791799">+20 100 079 1799</a></span>
+                </div>
+            </section>
+
+            <div class="policy-footer">
+                <span class="luxe-logo">✦ LUXE ✦</span>
+                <p style="margin-top: 0.5rem;">Last updated: August 18, 2026</p>
+            </div>
+
+        </div>
+        <!-- ===== END ENGLISH ===== -->
+
+    </div>
+
+    <!-- ===== LANGUAGE SYNC SCRIPT (مزامنة مع الموقع الرئيسي) ===== -->
+    <script>
+        (function() {
+            var STORAGE_KEY = 'luxe-lang';
+            var translations = {
+                back_store: { ar: '→ العودة إلى المتجر', en: '← Back to Store' },
+                header_desc: {
+                    ar: 'نحرص في <strong>LUXE</strong> على رضاكِ التام. إليكِ سياسة الاسترجاع والاستبدال الخاصة بنا.',
+                    en: 'At <strong>LUXE</strong>, your satisfaction is our priority. Here is our return &amp; exchange policy.'
+                }
+            };
+            var lang = window.__luxeLang || 'ar';
+            var toggleBtns = document.querySelectorAll('#langToggle button');
+            var arContent = document.getElementById('policyAr');
+            var enContent = document.getElementById('policyEn');
+            var initStyle = document.getElementById('langInitStyle');
+
+            function setLanguage(l) {
+                if (initStyle) { initStyle.remove(); initStyle = null; }
+                lang = l;
+                document.documentElement.lang = l;
+                document.documentElement.dir = (l === 'ar') ? 'rtl' : 'ltr';
+
+                // مزامنة اللغة مع الموقع الرئيسي
+                try { localStorage.setItem(STORAGE_KEY, l); } catch (e) {}
+
+                // تحديث الأزرار
+                toggleBtns.forEach(function(btn) {
+                    btn.classList.toggle('active', btn.dataset.lang === l);
+                });
+
+                // إظهار/إخفاء المحتوى
+                arContent.classList.toggle('hidden', l !== 'ar');
+                enContent.classList.toggle('hidden', l !== 'en');
+
+                // تحديث النصوص المترجمة
+                var backEl = document.querySelector('[data-i18n-back]');
+                if (backEl) backEl.textContent = translations.back_store[l];
+                var descEl = document.querySelector('[data-i18n-p]');
+                if (descEl) descEl.innerHTML = translations.header_desc[l];
+
+                // تحديث عنوان التبويب
+                document.title = l === 'ar' ? 'سياسة الاسترجاع والاستبدال - LUXE' : 'Return & Exchange Policy - LUXE';
+            }
+
+            // إضافة مستمعي الأحداث
+            toggleBtns.forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    setLanguage(this.dataset.lang);
+                });
+            });
+
+            // إذا تغيّرت اللغة في الموقع الرئيسي (نفس المتصفح/تبويب آخر)
+            window.addEventListener('storage', function(e) {
+                if (e.key === STORAGE_KEY && (e.newValue === 'ar' || e.newValue === 'en') && e.newValue !== lang) {
+                    setLanguage(e.newValue);
+                }
+            });
+
+            // تطبيق اللغة المبدئية (من الموقع الرئيسي)
+            setLanguage(lang);
+        })();
+    </script>
+
+</body>
+</html>
